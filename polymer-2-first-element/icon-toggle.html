@@ -34,6 +34,12 @@
       }
       static get properties() {
           return {
+              pressed: {
+                  type: Boolean,
+                  notify: true,
+                  reflectToAttribute: true,
+                  value: false
+              },
               toggleIcon: {
                   type: String
               }
