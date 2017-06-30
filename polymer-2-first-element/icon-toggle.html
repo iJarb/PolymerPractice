@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../polymer/lib/mixins/gesture-event-listeners.html">
 
 <dom-module id="icon-toggle">
 
@@ -26,7 +27,7 @@
   </template>
 
   <script>
-    class IconToggle extends Polymer.Element {
+    class IconToggle extends Polymer.GestureEventListeners(Polymer.Element) {
       static get is() {
           // give your new element a name
           //  must match the id given in your element's template definition
@@ -47,6 +48,10 @@
       }
       constructor() {
         super();
+        Polymer.Gestures.addListener(this, 'tap', () => this.toggle());
+      }
+      toggle() {
+          this.pressed = !this.pressed;
       }
     }
     customElements.define(IconToggle.is, IconToggle);
