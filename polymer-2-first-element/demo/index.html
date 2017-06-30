@@ -9,6 +9,18 @@
       */
     </script>
     <link rel="import" href="demo-element.html">
+    <custom-style>
+      <style>
+        /* Define a document-wide default—will not override a :host rule in  */
+        html {
+          --icon-toggle-outline-color: red;
+        }
+        /* Override the value specified in demo-element */
+        demo-element {
+          --icon-toggle-pressed-color: blue;
+        }
+      </style>
+    </custom-style>
   </head>
   <body>
     <demo-element></demo-element>
