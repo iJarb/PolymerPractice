@@ -22,7 +22,7 @@
     </style>
 
     <!-- shadow DOM goes here -->
-    <iron-icon icon="polymer"></iron-icon>
+    <iron-icon icon="[[toggleIcon]]"></iron-icon>
   </template>
 
   <script>
@@ -31,6 +31,13 @@
           // give your new element a name
           //  must match the id given in your element's template definition
           return "icon-toggle";
+      }
+      static get properties() {
+          return {
+              toggleIcon: {
+                  type: String
+              }
+          }
       }
       constructor() {
         super();
