@@ -1,0 +1,7 @@
+{
+  "name": "my-profile",
+  "short_name": "my-profile",
+  "description": "A polymer tutorial website for professional profile website for professional profile",
+  "start_url": "/",
+  "display": "standalone"
+}
