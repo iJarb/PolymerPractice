@@ -3,7 +3,8 @@
   "description": "A polymer tutorial website for professional profile website for professional profile",
   "main": "index.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^2.0.0"
+    "polymer": "Polymer/polymer#^2.0.0",
+    "app-layout": "polymerelements/app-layout#^2.0.0"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
