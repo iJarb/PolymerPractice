@@ -9,6 +9,13 @@
           static get is() {
               return 'my-profile-home';   // must be same as dom-module id
           }
+
+          constructor() {
+              super();
+
+              this.dispatchEvent(new CustomEvent('change-page', {
+                  bubbles: true, composed: true, detail: { title: 'Home' }}));
+          }
       }
 
       customElements.define(MyProfileHome.is, MyProfileHome);

@@ -10,9 +10,9 @@
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 
-<link rel="import" href="my-profile-404.html">
-<link rel="import" href="my-profile-login.html">
-<link rel="import" href="my-profile-home.html">
+<link rel="lazy-import" href="my-profile-404.html">
+<link rel="lazy-import" href="my-profile-login.html">
+<link rel="lazy-import" href="my-profile-home.html">
 
 <dom-module id="my-profile-app">
   <template>
@@ -53,7 +53,7 @@
     <app-header slot="header" reveals effects="waterfall">
       <app-toolbar>
         <paper-icon-button class="menu-btn" icon="menu" on-click="_toggleDrawer"></paper-icon-button>
-        <div main-title>Title</div>
+        <div main-title>[[title]]</div>
         <paper-icon-button icon="search"></paper-icon-button>
       </app-toolbar>
     </app-header>
@@ -92,6 +92,10 @@
               rootPattern: String,
               routeData: Object,
               subroute: String,
+              title: {
+                  type: String,
+                  value: "My Profile"
+              },
           };
       }
 
@@ -107,6 +111,19 @@
           // Get root pattern for app-route, for more info about `rootPath` see:
           // https://www.polymer-project.org/2.0/docs/upgrade#urls-in-templates
           this.rootPattern = (new URL(this.rootPath)).pathname;
+      }
+
+      ready() {
+          super.ready();
+          this.addEventListener('change-page', (e)=>this._onChangePage(e));
+      }
+
+      _onChangePage(event) {
+          let detail = event.detail;
+          if (detail.title) {
+              document.title = detail.title + ' | My Profile';
+              this.title = document.title;
+          }
       }
 
       _routePageChanged(page) {

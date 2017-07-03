@@ -9,6 +9,13 @@
             static get is() {
                 return 'my-profile-login';   // must be same as dom-module id
             }
+
+            constructor() {
+                super();
+
+                this.dispatchEvent(new CustomEvent('change-page', {
+                    bubbles: true, composed: true, detail: { title: 'Log in' }}));
+            }
         }
 
         customElements.define(MyProfileLogin.is, MyProfileLogin);
