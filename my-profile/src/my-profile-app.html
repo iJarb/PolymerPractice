@@ -3,6 +3,7 @@
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
 
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 
@@ -33,6 +34,8 @@
       }
     </style>
 
+    <iron-media-query query="max-width: 767px" query-matches="{{smallScreen}}"></iron-media-query>
+
     <app-header slot="header" reveals effects="waterfall">
       <app-toolbar>
         <paper-icon-button class="menu-btn" icon="menu" on-click="_toggleDrawer"></paper-icon-button>
@@ -41,10 +44,14 @@
       </app-toolbar>
     </app-header>
 
-    <app-drawer opened="{{drawerOpened}}" swipe-open tabindex="0">
-      <a href="/">Home</a><br/>
-      <a href="/">Log in</a><br/>
-    </app-drawer>
+    <dom-if if="[[_shouldRenderDrawer]]">
+      <template>
+        <app-drawer opened="{{drawerOpened}}" swipe-open tabindex="0">
+          <a href="/">Home</a><br/>
+          <a href="/">Log in</a><br/>
+        </app-drawer>
+      </template>
+    </dom-if>
 
     <sample-content size="100"></sample-content>
 
@@ -75,6 +82,10 @@
 
       _toggleDrawer() {
           this.drawerOpened = !this.drawerOpened;
+      }
+
+      _shouldRenderDrawer() {
+          return smallScreen;
       }
     }
 

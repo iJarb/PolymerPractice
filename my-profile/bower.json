@@ -7,7 +7,8 @@
     "app-layout": "polymerelements/app-layout#^2.0.0",
     "paper-icon-button": "polymerelements/paper-icon-button#^2.0.0",
     "iron-iconset-svg": "polymerelements/iron-iconset-svg#^2.0.0",
-    "iron-icons": "polymerelements/iron-icons#^2.0.1"
+    "iron-icons": "polymerelements/iron-icons#^2.0.1",
+    "iron-media-query": "polymerelements/iron-media-query#^2.0.0"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
