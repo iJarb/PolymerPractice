@@ -1,0 +1,16 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html"/>
+
+<dom-module id="my-profile-login">
+    <template>
+        Log in page...
+    </template>
+    <script>
+        class MyProfileLogin extends Polymer.Element {
+            static get is() {
+                return 'my-profile-login';   // must be same as dom-module id
+            }
+        }
+
+        customElements.define(MyProfileLogin.is, MyProfileLogin);
+    </script>
+</dom-module>

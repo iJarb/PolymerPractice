@@ -1,0 +1,16 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html"/>
+
+<dom-module id="my-profile-home">
+  <template>
+    Home page...
+  </template>
+  <script>
+      class MyProfileHome extends Polymer.Element {
+          static get is() {
+              return 'my-profile-home';   // must be same as dom-module id
+          }
+      }
+
+      customElements.define(MyProfileHome.is, MyProfileHome);
+  </script>
+</dom-module>

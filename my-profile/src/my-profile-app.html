@@ -4,8 +4,15 @@
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+
+<link rel="import" href="my-profile-404.html">
+<link rel="import" href="my-profile-login.html">
+<link rel="import" href="my-profile-home.html">
 
 <dom-module id="my-profile-app">
   <template>
@@ -33,6 +40,13 @@
         }
       }
     </style>
+    <app-location route="{{route}}"></app-location>
+    <app-route
+            route="{{route}}"
+            pattern="[[rootPattern]]:page"
+            data="{{routeData}}"
+            tail="{{subroute}}">
+    </app-route>
 
     <iron-media-query query="max-width: 767px" query-matches="{{smallScreen}}"></iron-media-query>
 
@@ -47,29 +61,17 @@
     <dom-if if="[[_shouldRenderDrawer]]">
       <template>
         <app-drawer opened="{{drawerOpened}}" swipe-open tabindex="0">
-          <a href="/">Home</a><br/>
-          <a href="/">Log in</a><br/>
+            <a name="home" href="/">Home</a><br/>
+            <a name="login" href="/login">Log in</a><br/>
         </app-drawer>
       </template>
     </dom-if>
 
-    <sample-content size="100"></sample-content>
-
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-
+    <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="404" role="main">
+      <my-profile-home name="home"></my-profile-home>
+      <my-profile-login name="login"></my-profile-login>
+      <my-profile-404 name="404"></my-profile-404>
+    </iron-pages>
   </template>
 
   <script>
@@ -80,12 +82,61 @@
     class MyProfileApp extends Polymer.Element {
       static get is() { return 'my-profile-app'; }
 
+      static get properties() {
+          return {
+              page: {
+                  type: String,
+                  reflectToAttribute: true,
+                  observer: '_pageChanged'
+              },
+              rootPattern: String,
+              routeData: Object,
+              subroute: String,
+          };
+      }
+
+      static get observers() {
+          return [
+              '_routePageChanged(routeData.page)',
+          ];
+      }
+
+      constructor() {
+          super();
+
+          // Get root pattern for app-route, for more info about `rootPath` see:
+          // https://www.polymer-project.org/2.0/docs/upgrade#urls-in-templates
+          this.rootPattern = (new URL(this.rootPath)).pathname;
+      }
+
+      _routePageChanged(page) {
+          if (page === undefined) {
+              return;
+          }
+          this.page = page || 'home';
+          this._toggleDrawer();
+      }
+
       _toggleDrawer() {
           this.drawerOpened = !this.drawerOpened;
       }
 
       _shouldRenderDrawer() {
           return smallScreen;
+      }
+
+      _pageChanged(page) {
+          // Load page import on demand. Show 404 page if fails
+          var resolvedPageUrl = this.resolveUrl('my-profile-' + page + '.html');
+          Polymer.importHref(
+              resolvedPageUrl,
+              null,
+              this._showPage404.bind(this),
+              true);
+      }
+
+      _showPage404() {
+          this.page = '404';
       }
     }
 
