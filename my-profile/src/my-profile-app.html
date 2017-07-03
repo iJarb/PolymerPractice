@@ -4,6 +4,8 @@
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+
 <dom-module id="my-profile-app">
   <template>
     <style>
@@ -33,11 +35,16 @@
 
     <app-header slot="header" reveals effects="waterfall">
       <app-toolbar>
-        <paper-icon-button class="menu-btn" icon="menu" drawer-toggle></paper-icon-button>
+        <paper-icon-button class="menu-btn" icon="menu" on-click="_toggleDrawer"></paper-icon-button>
         <div main-title>Title</div>
         <paper-icon-button icon="search"></paper-icon-button>
       </app-toolbar>
     </app-header>
+
+    <app-drawer opened="{{drawerOpened}}" swipe-open tabindex="0">
+      <a href="/">Home</a><br/>
+      <a href="/">Log in</a><br/>
+    </app-drawer>
 
     <sample-content size="100"></sample-content>
 
@@ -65,13 +72,9 @@
      */
     class MyProfileApp extends Polymer.Element {
       static get is() { return 'my-profile-app'; }
-      static get properties() {
-        return {
-          prop1: {
-            type: String,
-            value: 'my-profile-app'
-          }
-        };
+
+      _toggleDrawer() {
+          this.drawerOpened = !this.drawerOpened;
       }
     }
 
