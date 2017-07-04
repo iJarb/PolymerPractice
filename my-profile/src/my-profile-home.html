@@ -6,13 +6,25 @@
   </template>
   <script>
       class MyProfileHome extends Polymer.Element {
+          static get properties() { return {
+              visible: {
+                  type: Boolean,
+                  value: false
+              }
+          }}
+
           static get is() {
               return 'my-profile-home';   // must be same as dom-module id
           }
 
-          constructor() {
-              super();
+          static get observers() { return [
+              '_homeChanged(visible)'
+          ]}
 
+          _homeChanged(visible) {
+              if (!visible) {
+                  return;
+              }
               this.dispatchEvent(new CustomEvent('change-page', {
                   bubbles: true, composed: true, detail: { title: 'Home' }}));
           }

@@ -6,13 +6,26 @@
     </template>
     <script>
         class MyProfileLogin extends Polymer.Element {
+            static get properties() { return {
+                visible: {
+                    type: Boolean,
+                    value: false
+                }
+            }}
+
             static get is() {
                 return 'my-profile-login';   // must be same as dom-module id
             }
 
-            constructor() {
-                super();
+            static get observers() { return [
+                '_loginChanged(visible)'
+            ]}
 
+            _loginChanged(visible) {
+                if (!visible) {
+                    return;
+                }
+                super.ready();
                 this.dispatchEvent(new CustomEvent('change-page', {
                     bubbles: true, composed: true, detail: { title: 'Log in' }}));
             }
