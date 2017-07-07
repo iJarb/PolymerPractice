@@ -96,6 +96,9 @@
                   type: String,
                   value: "My Profile"
               },
+              _shouldRenderDrawer: {
+                  computed: '_computeShouldRenderDrawer(smallScreen)'
+              }
           };
       }
 
@@ -138,7 +141,7 @@
           this.drawerOpened = !this.drawerOpened;
       }
 
-      _shouldRenderDrawer() {
+      _computeShouldRenderDrawer(smallScreen) {
           return smallScreen;
       }
 
