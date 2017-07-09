@@ -1,8 +1,39 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html"/>
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 
 <dom-module id="my-profile-login">
     <template>
-        Log in page...
+    <style>
+        paper-button {
+            font-family: 'Roboto', 'Noto', sans-serif;
+            font-weight: normal;
+            font-size: 14px;
+            -webkit-font-smoothing: antialiased;
+        }
+        paper-button.indigo {
+            background-color: var(--paper-indigo-500);
+            color: white;
+            --paper-button-raised-keyboard-focus: {
+                background-color: var(--paper-pink-a200) !important;
+                color: white !important;
+            };
+        }
+    </style>
+
+    <iron-form id="login-form">
+        <paper-input always-float-label label="Username">
+            <iron-icon icon="mail" slot="prefix"></iron-icon>
+        </paper-input>
+        <paper-input always-float-label label="Password">
+            <iron-icon icon="lock" slot="prefix"></iron-icon>
+        </paper-input>
+        <div style="text-align: center;">
+            <paper-button raised class="indigo">Log in</paper-button>
+            <paper-button>Back</paper-button>
+        </div>
+    </iron-form>
     </template>
     <script>
         class MyProfileLogin extends Polymer.Element {
