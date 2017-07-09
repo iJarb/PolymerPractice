@@ -10,6 +10,8 @@
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 
+<link rel="import" href="my-profile-navigator.html">
+
 <link rel="lazy-import" href="my-profile-404.html">
 <link rel="lazy-import" href="my-profile-login.html">
 <link rel="lazy-import" href="my-profile-home.html">
@@ -54,18 +56,14 @@
       <app-toolbar>
         <paper-icon-button class="menu-btn" icon="menu" on-click="_toggleDrawer"></paper-icon-button>
         <div main-title>[[title]]</div>
+        <my-profile-navigator should-render="[[!_shouldRenderDrawer]]"></my-profile-navigator>
         <paper-icon-button icon="search"></paper-icon-button>
       </app-toolbar>
     </app-header>
 
-    <dom-if if="[[_shouldRenderDrawer]]">
-      <template>
-        <app-drawer opened="{{drawerOpened}}" swipe-open tabindex="0">
-            <a name="home" href="/">Home</a><br/>
-            <a name="login" href="/login">Log in</a><br/>
-        </app-drawer>
-      </template>
-    </dom-if>
+    <app-drawer opened="{{drawerOpened}}" swipe-open tabindex="0">
+      <my-profile-navigator should-render="[[_shouldRenderDrawer]]"></my-profile-navigator>
+    </app-drawer>
 
     <iron-pages selected="[[page]]" selected-attribute="visible" attr-for-selected="name" fallback-selection="404" role="main">
       <my-profile-home name="home"></my-profile-home>
@@ -138,7 +136,9 @@
       }
 
       _toggleDrawer() {
-          this.drawerOpened = !this.drawerOpened;
+          if (this._shouldRenderDrawer) {
+              this.drawerOpened = !this.drawerOpened;
+          }
       }
 
       _computeShouldRenderDrawer(smallScreen) {

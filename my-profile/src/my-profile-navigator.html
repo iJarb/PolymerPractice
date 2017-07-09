@@ -1,0 +1,36 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="my-profile-navigator">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <dom-if if="[[shouldRender]]">
+      <template>
+        <a name="home" href="/">Home</a><br/>
+        <a name="login" href="/login">Log in</a><br/>
+      </template>
+    </dom-if>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class MyProfileNavigator extends Polymer.Element {
+      static get is() { return 'my-profile-navigator'; }
+
+      static get properties() {
+          return {
+              shouldRender: Boolean
+          };
+      }
+    }
+
+    window.customElements.define(MyProfileNavigator.is, MyProfileNavigator);
+  </script>
+</dom-module>
