@@ -3,5 +3,16 @@
   "short_name": "my-profile",
   "description": "A polymer tutorial website for professional profile website for professional profile",
   "start_url": "/",
-  "display": "standalone"
+  "display": "standalone",
+  "icons": [{
+    "src": "images/profile-icon-128.png",
+    "sizes": "128x128",
+    "type": "image/png"
+  },{
+    "src": "images/profile-icon-384.png",
+    "sizes": "384x384",
+    "type": "image/png"
+  }],
+  "background_color": "#fff",
+  "theme_color": "#fff"
 }
