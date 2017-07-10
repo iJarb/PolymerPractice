@@ -6,12 +6,24 @@
       :host {
         display: block;
       }
+      a {
+        text-decoration: none;
+      }
+      ul li {
+        display: inline-block;
+        list-style: none;
+      }
+      :host(.list) ul li {
+        display: block;
+      }
     </style>
 
     <dom-if if="[[shouldRender]]">
       <template>
-        <a name="home" href="/">Home</a><br/>
-        <a name="login" href="/login">Log in</a><br/>
+        <ul>
+          <li><a name="home" href="/">Home</a><br/></li>
+          <li><a name="login" href="/login">Log in</a></li>
+        </ul>
       </template>
     </dom-if>
   </template>
