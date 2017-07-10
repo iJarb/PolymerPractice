@@ -14,6 +14,7 @@
 
 <link rel="lazy-import" href="my-profile-404.html">
 <link rel="lazy-import" href="my-profile-login.html">
+<link rel="lazy-import" href="my-profile-register.html">
 <link rel="lazy-import" href="my-profile-home.html">
 
 <dom-module id="my-profile-app">
@@ -68,6 +69,7 @@
     <iron-pages selected="[[page]]" selected-attribute="visible" attr-for-selected="name" fallback-selection="404" role="main">
       <my-profile-home name="home"></my-profile-home>
       <my-profile-login name="login"></my-profile-login>
+      <my-profile-register name="register"></my-profile-register>
       <my-profile-404 name="404"></my-profile-404>
     </iron-pages>
   </template>

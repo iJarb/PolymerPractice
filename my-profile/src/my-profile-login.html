@@ -56,7 +56,6 @@
                 if (!visible) {
                     return;
                 }
-                super.ready();
                 this.dispatchEvent(new CustomEvent('change-page', {
                     bubbles: true, composed: true, detail: { title: 'Log in' }}));
             }
