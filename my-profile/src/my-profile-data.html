@@ -1,5 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-
+<link rel="import" href="../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
 
 <dom-module id="my-profile-data">
   <template>
@@ -21,6 +21,23 @@
                 notify: true
             }
         };
+      }
+
+      ready() {
+          super.ready();
+          if (this.users.length == 0) {
+              this.addUser("admin", "trungtanbui@gmail.com", 20, "myP@ss123");
+          }
+          console.log(this.users);
+      }
+
+      addUser(username, email, age, password) {
+          this.push('users', {
+              "username":username,
+              "email":email,
+              "age":age,
+              "password":password
+          });
       }
     }
 

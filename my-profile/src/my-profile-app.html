@@ -11,6 +11,7 @@
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 
 <link rel="import" href="my-profile-navigator.html">
+<link rel="import" href="my-profile-data.html">
 
 <link rel="lazy-import" href="my-profile-404.html">
 <link rel="lazy-import" href="my-profile-login.html">
@@ -50,6 +51,8 @@
             data="{{routeData}}"
             tail="{{subroute}}">
     </app-route>
+
+    <my-profile-data id="users" users="{{users}}"></my-profile-data>
 
     <iron-media-query query="max-width: 767px" query-matches="{{smallScreen}}"></iron-media-query>
 
