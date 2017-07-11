@@ -29,9 +29,9 @@
             margin-bottom: 15px;
         }
     </style>
-
+    <my-profile-data users="{{users}}"></my-profile-data>
     <iron-form id="registerForm">
-        <form method="post" action="/register">
+        <form method="post">
             <div class="form-item">
                 <vaadin-text-field label="User Name" minlength="4" maxlength="8" required pattern="^\w+$" value="TanBui" name="username"></vaadin-text-field>
                 <br/><span>* from 4 to 8 characters without spaces</span>
@@ -88,10 +88,11 @@
                 }
             }
             _processSubmit(e) {
-                this.$.demoOutput.innerHTML = JSON.stringify(event.detail);
+                this.push("users", e.detail);
+                this.$.demoOutput.innerHTML = "User has been registered successfully.";
             }
             _preProcessSubmit(e) {
-                console.log(event.detail);
+                //todo: check if user is existed.
             }
 
             _registerChanged(visible) {
