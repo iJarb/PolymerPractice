@@ -15,7 +15,8 @@
     "iron-form": "polymerelements/iron-form#^2.0.0",
     "paper-input": "polymerelements/paper-input#^2.0.1",
     "paper-button": "polymerelements/paper-button#^2.0.0",
-    "vaadin-text-field": "vaadin/vaadin-text-field#^1.0.0"
+    "vaadin-text-field": "vaadin/vaadin-text-field#^1.0.0",
+    "app-storage": "polymerelements/app-storage#^2.0.2"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",

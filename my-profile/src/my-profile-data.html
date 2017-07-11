@@ -1,0 +1,29 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+
+<dom-module id="my-profile-data">
+  <template>
+    <app-localstorage-document key="my-profile-data" data="{{users}}"></app-localstorage-document>
+  </template>
+  
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class MyProfileData extends Polymer.Element {
+      static get is() { return 'my-profile-data'; }
+      static get properties() {
+        return {
+            users: {
+                type: Array,
+                value: () => [],
+                notify: true
+            }
+        };
+      }
+    }
+
+    window.customElements.define(MyProfileData.is, MyProfileData);
+  </script>
+</dom-module>
