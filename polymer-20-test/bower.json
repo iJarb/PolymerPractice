@@ -4,7 +4,7 @@
   "main": "index.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
-    "vaadin-date-picker": "vaadin/vaadin-date-picker#^1.2.3"
+    "vaadin-date-picker": "vaadin/vaadin-date-picker#^2.0.0-beta1"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
