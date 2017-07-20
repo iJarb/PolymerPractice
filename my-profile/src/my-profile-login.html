@@ -21,18 +21,24 @@
             };
         }
     </style>
+    <my-profile-data id="myData" login-user="{{currentUser}}"></my-profile-data>
 
-    <iron-form id="login-form">
-        <paper-input always-float-label label="Username">
-            <iron-icon icon="mail" slot="prefix"></iron-icon>
-        </paper-input>
-        <paper-input always-float-label label="Password">
-            <iron-icon icon="lock" slot="prefix"></iron-icon>
-        </paper-input>
-        <div style="text-align: center;">
-            <paper-button raised class="indigo">Log in</paper-button>
-            <paper-button>Back</paper-button>
-        </div>
+    <iron-form id="loginForm">
+        <form method="post">
+            <paper-input always-float-label label="Username" autofocus name="username" value="admin">
+                <iron-icon icon="account-box" slot="prefix"></iron-icon>
+            </paper-input>
+            <paper-input always-float-label label="Password" type="password" name="password" value="myP@ss123">
+                <iron-icon icon="lock" slot="prefix"></iron-icon>
+            </paper-input>
+            <div style="text-align: center;">
+                <paper-button raised class="indigo" id="btnSubmit">Log in</paper-button>
+                <paper-button>Back</paper-button>
+            </div>
+        </form>
+
+        <p><i>This login is simulated with <strong>local storage</strong> and <strong>session storage</strong>.<br/>
+        It's your own security risk to store login data into session storage.</i></p>
     </iron-form>
     </template>
     <script>
@@ -51,6 +57,20 @@
             static get observers() { return [
                 '_loginChanged(visible)'
             ]}
+
+            ready() {
+                super.ready();
+                this.$.btnSubmit.addEventListener('click', e => {this._submit(e)});
+                this.$.loginForm.addEventListener('iron-form-submit', e => {this._processSubmit(e)});
+            }
+            _submit(e) {
+                this.$.loginForm.submit();
+            }
+
+            // iron-form fields must have "name" attribute
+            _processSubmit(e) {
+                this.$.myData.logIn(e.detail.username, e.detail.password);
+            }
 
             _loginChanged(visible) {
                 if (!visible) {

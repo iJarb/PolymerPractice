@@ -4,6 +4,7 @@
 <dom-module id="my-profile-data">
   <template>
     <app-localstorage-document key="my-profile-data" data="{{users}}"></app-localstorage-document>
+    <app-localstorage-document session-only="true" key="login-data" data="{{loginUser}}"></app-localstorage-document>
   </template>
   
   <script>
@@ -20,10 +21,10 @@
                 value: () => [],
                 notify: true
             },
-            currentUser: {
+            loginUser: {
                 type: Object,
                 notify: true,
-                value: {},
+                value: null,
                 reflectToAttribute: true
             }
         };
@@ -48,6 +49,14 @@
               "age":age,
               "password":password
           });
+      }
+
+      logIn(username, password) {
+          const user = this.users.find(x => x.username === username && x.password === password);
+          if (user) {
+              delete user.password;
+              this.loginUser = user;
+          }
       }
     }
 

@@ -52,8 +52,6 @@
             tail="{{subroute}}">
     </app-route>
 
-    <my-profile-data users="{{users}}"></my-profile-data>
-
     <iron-media-query query="max-width: 767px" query-matches="{{smallScreen}}"></iron-media-query>
 
     <app-header slot="header" reveals effects="waterfall">
@@ -70,6 +68,7 @@
     </app-drawer>
 
     <iron-pages selected="[[page]]" selected-attribute="visible" attr-for-selected="name" fallback-selection="404" role="main">
+
       <my-profile-home name="home"></my-profile-home>
       <my-profile-login name="login"></my-profile-login>
       <my-profile-register name="register"></my-profile-register>
