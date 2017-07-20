@@ -29,7 +29,7 @@
             margin-bottom: 15px;
         }
     </style>
-    <my-profile-data users="{{users}}"></my-profile-data>
+    <my-profile-data id="myData"></my-profile-data>
     <iron-form id="registerForm">
         <form method="post">
             <div class="form-item">
@@ -88,7 +88,7 @@
                 }
             }
             _processSubmit(e) {
-                this.push("users", e.detail);
+                this.$.myData.addUser(e.detail);
                 this.$.demoOutput.innerHTML = "User has been registered successfully.";
             }
             _preProcessSubmit(e) {

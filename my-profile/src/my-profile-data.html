@@ -19,6 +19,12 @@
                 type: Array,
                 value: () => [],
                 notify: true
+            },
+            currentUser: {
+                type: Object,
+                notify: true,
+                value: {},
+                reflectToAttribute: true
             }
         };
       }
@@ -28,6 +34,11 @@
           if (this.users.length == 0) {
               this.addUser("admin", "trungtanbui@gmail.com", 20, "myP@ss123");
           }
+      }
+
+      // could have some validation or conversion here
+      addUser(object) {
+          this.push('users', object);
       }
 
       addUser(username, email, age, password) {
