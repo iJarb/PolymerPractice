@@ -4,6 +4,7 @@
 <dom-module id="my-profile-data">
   <template>
     <app-localstorage-document key="my-profile-data" data="{{users}}"></app-localstorage-document>
+    <app-localstorage-document session-only="true" key="login-data" data="{{loginUser}}"></app-localstorage-document>
   </template>
   
   <script>
@@ -20,10 +21,10 @@
                 value: () => [],
                 notify: true
             },
-            currentUser: {
+            loginUser: {
                 type: Object,
                 notify: true,
-                value: {},
+                value: null,
                 reflectToAttribute: true
             }
         };
@@ -32,7 +33,12 @@
       ready() {
           super.ready();
           if (this.users.length == 0) {
-              this.addUser("admin", "trungtanbui@gmail.com", 20, "myP@ss123");
+              this.addUser({
+                  "username":"admin",
+                  "email":"trungtanbui@gmail.com",
+                  "age":20,
+                  "password":"myP@ss123"
+              })
           }
       }
 
@@ -41,13 +47,14 @@
           this.push('users', object);
       }
 
-      addUser(username, email, age, password) {
-          this.push('users', {
-              "username":username,
-              "email":email,
-              "age":age,
-              "password":password
-          });
+      logIn(username, password) {
+          let user = this.users.find(x => x.username === username && x.password === password);
+          if (user) {
+              //delete user.password;   //cannot login again if delete this password
+              this.loginUser = user;
+              return true;
+          }
+          return false;
       }
     }
 
