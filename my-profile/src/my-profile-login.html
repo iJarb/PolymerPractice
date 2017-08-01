@@ -21,6 +21,7 @@
             };
         }
     </style>
+    <app-location route="{{route}}"></app-location>
     <my-profile-data id="myData" login-user="{{currentUser}}"></my-profile-data>
 
     <iron-form id="loginForm">
@@ -72,7 +73,14 @@
             _processSubmit(e) {
                 if (this.$.myData.logIn(e.detail.username, e.detail.password)) {
                     this.$.loginResult.style.display = 'none';
-                    //redirect to home page
+                    //window.location.replace('/');
+                    //window.history.pushState({}, null, '/home');
+                    Polymer.importHref(this.resolveUrl('/home'), null, null, true);
+                    this.dispatchEvent(new CustomEvent('change-page', {
+                        bubbles: true, composed: true, detail: { title: 'Home' }}))
+                    this.set('route.path', '/home');
+                    // thisPage.setVisiable = false
+                    // my-profile-home.servisible=true
                 } else {
                     this.$.loginResult.style.display = 'block';
                     this.$.loginResult.innerHTML = "Wrong authentication. Please try again.";
