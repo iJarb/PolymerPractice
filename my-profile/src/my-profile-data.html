@@ -4,7 +4,7 @@
 <dom-module id="my-profile-data">
   <template>
     <app-localstorage-document key="my-profile-data" data="{{users}}"></app-localstorage-document>
-    <app-localstorage-document session-only="true" key="login-data" data="{{loginUser}}"></app-localstorage-document>
+    <app-localstorage-document id="loginUserStorage" session-only="true" key="login-data" data="{{loginUser}}"></app-localstorage-document>
   </template>
   
   <script>
@@ -23,8 +23,8 @@
             },
             loginUser: {
                 type: Object,
-                notify: true,
                 value: null,
+                notify: true,
                 reflectToAttribute: true
             }
         };
@@ -32,7 +32,9 @@
 
       ready() {
           super.ready();
-          if (this.users.length == 0) {
+          // The data from storages will be load to users or loginUser when something calls those variables
+          this.loginUser = this.$.loginUserStorage.__parseValueFromStorage();
+          if (this.users.length === 0) {
               this.addUser({
                   "username":"admin",
                   "email":"trungtanbui@gmail.com",
@@ -52,9 +54,12 @@
           if (user) {
               //delete user.password;   //cannot login again if delete this password
               this.loginUser = user;
-              return true;
+              return user;
           }
           return false;
+      }
+      getLoginUser() {
+          return this.loginUser;
       }
     }
 

@@ -2,6 +2,7 @@
 
 <dom-module id="my-profile-home">
   <template>
+    <my-profile-data id="myData"></my-profile-data>
     Home page...
   </template>
   <script>
@@ -25,6 +26,7 @@
               if (!visible) {
                   return;
               }
+              console.log(this.$.myData.getLoginUser());
               this.dispatchEvent(new CustomEvent('change-page', {
                   bubbles: true, composed: true, detail: { title: 'Home' }}));
           }
