@@ -2,8 +2,8 @@
 
 <dom-module id="my-profile-home">
   <template>
-    <my-profile-data id="myData"></my-profile-data>
     Home page...
+    <div>[[user.username]]</div>
   </template>
   <script>
       class MyProfileHome extends Polymer.Element {
@@ -11,7 +11,8 @@
               visible: {
                   type: Boolean,
                   value: false
-              }
+              },
+              user: Object
           }}
 
           static get is() {
@@ -26,9 +27,9 @@
               if (!visible) {
                   return;
               }
-              console.log(this.$.myData.getLoginUser());
+              let theTitle = this.user.username ? this.user.username : "Home";
               this.dispatchEvent(new CustomEvent('change-page', {
-                  bubbles: true, composed: true, detail: { title: 'Home' }}));
+                  bubbles: true, composed: true, detail: { title: theTitle }}));
           }
       }
 

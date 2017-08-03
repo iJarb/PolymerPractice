@@ -44,6 +44,7 @@
         }
       }
     </style>
+    <my-profile-data id="myData"></my-profile-data>
     <app-location route="{{route}}"></app-location>
     <app-route
             route="{{route}}"
@@ -69,7 +70,7 @@
 
     <iron-pages selected="[[page]]" selected-attribute="visible" attr-for-selected="name" fallback-selection="404" role="main">
 
-      <my-profile-home name="home"></my-profile-home>
+      <my-profile-home name="home" user="[[user]]"></my-profile-home>
       <my-profile-login name="login"></my-profile-login>
       <my-profile-register name="register"></my-profile-register>
       <my-profile-404 name="404"></my-profile-404>
@@ -106,7 +107,7 @@
 
       static get observers() {
           return [
-              '_routePageChanged(routeData.page)',
+              '_routePageChanged(routeData.page)'
           ];
       }
 
@@ -121,6 +122,8 @@
       ready() {
           super.ready();
           this.addEventListener('change-page', (e)=>this._onChangePage(e));
+          this.addEventListener('user-login', (e)=>this._onUserLogin(e));
+          this.user = this.$.myData.getLoginUser();
       }
 
       _onChangePage(event) {
@@ -129,6 +132,12 @@
               document.title = detail.title + ' | My Profile';
               this.title = document.title;
           }
+      }
+
+      _onUserLogin(event) {
+          let user = event.detail;
+          document.title = user.username + ' | My Profile';
+          this.title = document.title;
       }
 
       _routePageChanged(page) {
