@@ -4,6 +4,7 @@
   <template>
     <my-profile-data id="myData"></my-profile-data>
     Home page...
+    <div>[[loginUser.username]]</div>
   </template>
   <script>
       class MyProfileHome extends Polymer.Element {
@@ -19,16 +20,21 @@
           }
 
           static get observers() { return [
-              '_homeChanged(visible)'
+              '_showHome(visible)'
           ]}
 
-          _homeChanged(visible) {
+          _showHome(visible) {
               if (!visible) {
                   return;
               }
-              console.log(this.$.myData.getLoginUser());
+              let theTitle = "Home";
+              this.loginUser = this.$.myData.getLoginUser();
+              if (this.loginUser !== null) {
+                  theTitle = this.loginUser.username;
+              }
+
               this.dispatchEvent(new CustomEvent('change-page', {
-                  bubbles: true, composed: true, detail: { title: 'Home' }}));
+                  bubbles: true, composed: true, detail: { title: theTitle }}));
           }
       }
 

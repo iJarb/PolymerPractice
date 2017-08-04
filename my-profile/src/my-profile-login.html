@@ -33,7 +33,7 @@
                 <iron-icon icon="lock" slot="prefix"></iron-icon>
             </paper-input>
             <div style="text-align: center;">
-                <paper-button raised class="indigo" id="btnSubmit">Log in</paper-button>
+                <paper-button raised class="indigo" id="btnSubmit">Submit</paper-button>
                 <paper-button>Back</paper-button>
             </div>
             <div id="loginResult"></div>
@@ -57,7 +57,7 @@
             }
 
             static get observers() { return [
-                '_loginChanged(visible)'
+                '_showLogin(visible)'
             ]}
 
             ready() {
@@ -71,6 +71,12 @@
 
             // iron-form fields must have "name" attribute
             _processSubmit(e) {
+                if (this.loginUser !== null) {
+                    this.$.myData.logOut();
+                    this.set('route.path', '/home');
+                    this.dispatchEvent(new CustomEvent('user-logout', {
+                        bubbles: true, composed: true, detail: this.loginUser}))
+                }
                 let user = this.$.myData.logIn(e.detail.username, e.detail.password);
                 if (user) {
                     this.$.loginResult.style.display = 'none';
@@ -87,12 +93,21 @@
                 }
             }
 
-            _loginChanged(visible) {
+            _showLogin(visible) {
                 if (!visible) {
                     return;
                 }
+                let theTitle = "Log in";
+                let buttonText = "Log in";
+
+                this.loginUser = this.$.myData.getLoginUser();
+                if (this.loginUser !== null) {
+                    theTitle = this.loginUser.username;
+                    buttonText = "Log out";
+                }
+                this.$.btnSubmit.innerHTML = buttonText;
                 this.dispatchEvent(new CustomEvent('change-page', {
-                    bubbles: true, composed: true, detail: { title: 'Log in' }}));
+                    bubbles: true, composed: true, detail: { title: theTitle }}));
             }
         }
 

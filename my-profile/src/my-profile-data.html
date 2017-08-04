@@ -59,7 +59,12 @@
           return false;
       }
       getLoginUser() {
-          return this.loginUser;
+          return this.$.loginUserStorage.__parseValueFromStorage();
+      }
+
+      logOut() {
+          this.loginUser = null;
+          this.$.loginUserStorage.saveValue();
       }
     }
 

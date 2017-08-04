@@ -54,7 +54,7 @@
 
     <iron-media-query query="max-width: 767px" query-matches="{{smallScreen}}"></iron-media-query>
 
-    <app-header slot="header" reveals effects="waterfall">
+    <app-header slot="header" reveals>
       <app-toolbar>
         <paper-icon-button class="menu-btn" icon="menu" on-click="_toggleDrawer"></paper-icon-button>
         <div main-title>[[title]]</div>
@@ -130,6 +130,10 @@
               this.title = document.title;
           }
       }
+
+//      attributeChangedCallback() {
+//          super.attributeChangedCallback();
+//      }
 
       _routePageChanged(page) {
           if (page === undefined) {

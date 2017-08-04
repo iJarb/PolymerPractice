@@ -70,7 +70,7 @@
             }
 
             static get observers() { return [
-                '_registerChanged(visible)'
+                '_showRegister(visible)'
             ]}
 
             ready() {
@@ -95,12 +95,17 @@
                 //todo: check if user is existed.
             }
 
-            _registerChanged(visible) {
+            _showRegister(visible) {
                 if (!visible) {
                     return;
                 }
+                let theTitle = "Register";
+                this.loginUser = this.$.myData.getLoginUser();
+                if (this.loginUser !== null) {
+                    theTitle = this.loginUser.username;
+                }
                 this.dispatchEvent(new CustomEvent('change-page', {
-                    bubbles: true, composed: true, detail: { title: 'Register' }}));
+                    bubbles: true, composed: true, detail: { title: theTitle }}));
             }
         }
 
