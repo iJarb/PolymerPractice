@@ -54,7 +54,6 @@
             <paper-button>Back</paper-button>
         </div>
     </iron-form>
-    <div id="demoOutput"></div>
     </template>
     <script>
         class MyProfileRegister extends Polymer.Element {
@@ -89,7 +88,8 @@
             }
             _processSubmit(e) {
                 this.$.myData.addUser(e.detail);
-                this.$.demoOutput.innerHTML = "User has been registered successfully.";
+                this.dispatchEvent(new CustomEvent('show-toast', {
+                    bubbles: true, composed: true, detail: "Welcome to our website, " + event.detail.username + "!"}))
             }
             _preProcessSubmit(e) {
                 //todo: check if user is existed.

@@ -2,9 +2,11 @@
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
@@ -35,6 +37,11 @@
 
       .menu-btn {
         display: none;
+      }
+
+      .yellow-button {
+        text-transform: none;
+        color: #eeff41;
       }
 
       /* small screen */
@@ -74,6 +81,8 @@
       <my-profile-register name="register"></my-profile-register>
       <my-profile-404 name="404"></my-profile-404>
     </iron-pages>
+
+    <paper-toast id="appLeftBottomToast" text="You have a new message."></paper-toast>
   </template>
 
   <script>
@@ -121,6 +130,7 @@
       ready() {
           super.ready();
           this.addEventListener('change-page', (e)=>this._onChangePage(e));
+          this.addEventListener('show-toast', (e)=>this._onShowToast(e));
       }
 
       _onChangePage(event) {
@@ -130,7 +140,10 @@
               this.title = document.title;
           }
       }
-
+      _onShowToast(event) {
+          this.$.appLeftBottomToast.text = event.detail;
+          this.$.appLeftBottomToast.open();
+      }
 //      attributeChangedCallback() {
 //          super.attributeChangedCallback();
 //      }

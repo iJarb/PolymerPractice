@@ -76,20 +76,21 @@
                     this.set('route.path', '/home');
                     this.dispatchEvent(new CustomEvent('user-logout', {
                         bubbles: true, composed: true, detail: this.loginUser}))
-                }
-                let user = this.$.myData.logIn(e.detail.username, e.detail.password);
-                if (user) {
-                    this.$.loginResult.style.display = 'none';
-                    //window.location.replace('/');
-                    //window.history.pushState({}, null, '/home');
-                    //Polymer.importHref(this.resolveUrl('/home'), null, null, true);
-                    // this.visible = false;
-                    this.set('route.path', '/home');
-                    this.dispatchEvent(new CustomEvent('user-login', {
-                            bubbles: true, composed: true, detail: user}))
                 } else {
-                    this.$.loginResult.style.display = 'block';
-                    this.$.loginResult.innerHTML = "Wrong authentication. Please try again.";
+                    let user = this.$.myData.logIn(e.detail.username, e.detail.password);
+                    if (user) {
+                        this.$.loginResult.style.display = 'none';
+                        //window.location.replace('/');
+                        //window.history.pushState({}, null, '/home');
+                        //Polymer.importHref(this.resolveUrl('/home'), null, null, true);
+                        // this.visible = false;
+                        this.set('route.path', '/home');
+                        this.dispatchEvent(new CustomEvent('show-toast', {
+                            bubbles: true, composed: true, detail: "Welcome back, " + user.username + "!"}))
+                    } else {
+                        this.$.loginResult.style.display = 'block';
+                        this.$.loginResult.innerHTML = "Wrong authentication. Please try again.";
+                    }
                 }
             }
 
