@@ -155,6 +155,10 @@
 
       _pageChanged(page) {
           // Load page import on demand. Show 404 page if fails
+          // Register service worker if supported.
+          if ('serviceWorker' in navigator) {
+              navigator.serviceWorker.register('service-worker.js', {scope: '/'});
+          }
           var resolvedPageUrl = this.resolveUrl('my-profile-' + page + '.html');
           Polymer.importHref(
               resolvedPageUrl,

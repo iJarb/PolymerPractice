@@ -3,7 +3,9 @@
   "shell": "src/my-profile-app.html",
   "fragments": [
     "src/my-profile-navigator.html",
-    "src/my-profile-login.html"
+    "src/my-profile-home.html",
+    "src/my-profile-login.html",
+    "src/my-profile-register.html"
   ],
   "sources": [
     "src/**/*",
@@ -12,7 +14,7 @@
   ],
   "extraDependencies": [
     "manifest.json",
-    "bower_components/webcomponentsjs/webcomponents-lite.js"
+    "bower_components/webcomponentsjs/*"
   ],
   "lint": {
     "rules": [
