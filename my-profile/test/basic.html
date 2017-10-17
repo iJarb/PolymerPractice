@@ -1,0 +1,50 @@
+<!doctype html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>vaadin-designer-viewport tests</title>
+
+  <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../bower_components/web-component-tester/browser.js"></script>
+
+  <link rel="import" href="../src/my-profile-app.html">
+</head>
+
+<body>
+
+<test-fixture id="no-content">
+  <template>
+    <my-profile-app></my-profile-app>
+  </template>
+</test-fixture>
+
+<script>
+
+    suite('my-profile-app', function() {
+        var app;
+
+        setup(function() {
+            app = fixture('no-content');
+        });
+
+        test('should have no content', function() {
+            assert.equal(app.childElementCount, 0);
+        });
+
+        test('App must have header', function (done) {
+                var header = Polymer.dom(app.root).querySelector('app-header');
+                assert.notEqual(header, null);
+                done();
+        });
+
+        test('Header must have toolbar', function (done) {
+            var toolbar = Polymer.dom(app.root).querySelector('app-header').querySelector("app-toolbar");
+            assert.notEqual(toolbar, null);
+            done();
+        });
+
+    });
+
+</script>
+
+</body>
