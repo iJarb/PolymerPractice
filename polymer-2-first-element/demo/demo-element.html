@@ -29,11 +29,36 @@
 
     <!-- curly brackets ({{}}} allow two-way binding --> 
     <icon-toggle toggle-icon="favorite" pressed="{{isFav}}"></icon-toggle>
+
+    <hr/>
+
+    <div> Employee list: </div>
+    <template is="dom-repeat" items="{{employees}}">
+      <div># [[index]]</div>
+      <div>First name: <span>[[item.first]]</span></div>
+      <div>Last name: <span>[[item.last]]</span></div>
+    </template>
+
   </template>
 
   <script>
     class DemoElement extends Polymer.Element {
       static get is() { return "demo-element" }
+
+        static get properties() {
+            return {
+                employees: {
+                    type: Array,
+                    value() {
+                        return [
+                            {first: 'Bob', last: 'Smith'},
+                            {first: 'Sally', last: 'Johnson'},
+                        ];
+                    }
+                }
+            }
+        }
+
       _message(fav) {
         if (fav) {
           return "You really like me!";
@@ -41,6 +66,26 @@
         else {
           return "Do you like me?";
         }
+      }
+
+      ready() {
+          super.ready();
+
+          setTimeout(() => {
+              // Use Polymer array mutation methods:
+              this.push('employees', {first: 'Tan', last: 'Bui'});
+
+              // Use native methods followed by notifyPath
+              this.employees.push({first: 'Tan 2', last: 'Bui 2'});
+              this.notifyPath('employees');
+
+              console.log("Pushed a new item");
+          }, 2000);
+          setTimeout(() => {
+              // Use Polymer set method:
+              this.set('employees.2.last', 'Bui - updated');
+          }, 2500);
+
       }
     }
     customElements.define(DemoElement.is, DemoElement);
