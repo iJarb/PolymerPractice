@@ -5,6 +5,15 @@
     <my-profile-data id="myData"></my-profile-data>
     Home page...
     <div>[[loginUser.username]]</div>
+
+    <h3>Skills: </h3>
+    <template is="dom-repeat" id="skill-list" items="{{skills}}">
+      <div id$="skill=[[index]]">
+        [[item.name]]: [[item.level]] <button on-click="deleteSkill">Delete</button>
+      </div>
+      <br/>
+    </template>
+
   </template>
   <script>
       class MyProfileHome extends Polymer.Element {
@@ -12,6 +21,15 @@
               visible: {
                   type: Boolean,
                   value: false
+              },
+              skills: {
+                  type: Array,
+                  value: [
+                      {name: "Polymer", level: "Beginner"},
+                      {name: "ES6", level: "Intermediate"},
+                      {name: "CSS3", level: "Intermediate"},
+                      {name: "HTML5", level: "Advanced"}
+                  ]
               }
           }}
 
@@ -35,6 +53,11 @@
 
               this.dispatchEvent(new CustomEvent('change-page', {
                   bubbles: true, composed: true, detail: { title: theTitle }}));
+          }
+
+          deleteSkill(e) {
+              this.splice('skills', e.model.itemsIndex, 1);
+              this.notifyPath('skills');
           }
       }
 
