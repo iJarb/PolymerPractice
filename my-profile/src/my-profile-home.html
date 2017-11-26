@@ -7,9 +7,11 @@
     <div>[[loginUser.username]]</div>
 
     <h3>Skills: </h3>
-    <template is="dom-repeat" id="skill-list" items="{{skills}}">
+    Search skill: <input value="{{searchString::input}}">
+    <br/><br/>
+    <template is="dom-repeat" id="skill-list" items="{{skills}}" as="skill" filter="{{computeFilter(searchString)}}">
       <div id$="skill=[[index]]">
-        [[item.name]]: [[item.level]] <button on-click="deleteSkill">Delete</button>
+        [[skill.name]]: [[skill.level]] <button on-click="deleteSkill">Delete</button>
       </div>
       <br/>
     </template>
@@ -58,6 +60,20 @@
           deleteSkill(e) {
               this.splice('skills', e.model.itemsIndex, 1);
               this.notifyPath('skills');
+          }
+
+          computeFilter(string) {
+              if (!string) {
+                  // set filter to null to disable filtering
+                  return null;
+              } else {
+                  // return a filter function for the current search string
+                  string = string.toLowerCase();
+                  return function(skill) {
+                      let skillName = skill.name.toLowerCase();
+                      return (skillName.indexOf(string) != -1);
+                  };
+              }
           }
       }
 
