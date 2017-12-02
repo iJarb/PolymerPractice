@@ -38,8 +38,9 @@
               pressed: {
                   type: Boolean,
                   notify: true,
-                  reflectToAttribute: true,
-                  value: false
+                  reflectToAttribute: false,
+                  value: false,
+                  observer: '_printPressedValue'
               },
               toggleIcon: {
                   type: String
@@ -53,6 +54,12 @@
       toggle() {
           this.pressed = !this.pressed;
       }
+
+      _printPressedValue(isPr) {
+          
+          console.log(x);
+      }
+
     }
     customElements.define(IconToggle.is, IconToggle);
   </script>

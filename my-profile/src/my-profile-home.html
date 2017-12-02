@@ -3,7 +3,8 @@
 <dom-module id="my-profile-home">
   <template>
     <my-profile-data id="myData"></my-profile-data>
-    Home page...
+    <slot name="title">Default tiltle</slot>
+    <slot>Default content</slot>
     <div>[[loginUser.username]]</div>
 
     <h3>Skills: </h3>

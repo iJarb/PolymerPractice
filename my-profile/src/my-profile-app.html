@@ -76,7 +76,10 @@
 
     <iron-pages selected="[[page]]" selected-attribute="visible" attr-for-selected="name" fallback-selection="404" role="main">
 
-      <my-profile-home name="home"></my-profile-home>
+      <my-profile-home name="home">
+        <h3 slot="title">Home page</h3>
+        Hello, this is the content from light-DOM, which overwrites default content from local DOM.
+      </my-profile-home>
       <my-profile-login name="login"></my-profile-login>
       <my-profile-register name="register"></my-profile-register>
       <my-profile-404 name="404"></my-profile-404>
