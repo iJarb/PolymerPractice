@@ -11,7 +11,7 @@
     Search skill: <input value="{{searchString::input}}">
     <br/><br/>
     <template is="dom-repeat" id="skill-list" items="{{skills}}" as="skill" filter="{{computeFilter(searchString)}}">
-      <div id$="skill=[[index]]">
+      <div id$="skill-[[index]]">
         [[skill.name]]: [[skill.level]] <button on-click="deleteSkill">Delete</button>
       </div>
       <br/>

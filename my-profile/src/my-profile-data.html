@@ -13,16 +13,34 @@
 
 
     <app-pouchdb-document
-            db-name="my-profile"
+            db-name="profile"
             doc-id="doc-1"
             data="{{firstDoc}}">
     </app-pouchdb-document>
 
     <app-pouchdb-document
-            db-name="my-profile"
-            doc-id="dcc-2"
+            db-name="profile"
+            doc-id="doc-2"
             data="{{secondDoc}}">
     </app-pouchdb-document>
+
+    <!--<app-pouchdb-index-->
+            <!--db-name="profile"-->
+            <!--fields='["integer"]'>-->
+    <!--</app-pouchdb-index>-->
+
+    <app-pouchdb-query
+            id="query"
+            db-name="profile"
+            selector="_id $gt 0"
+            fields='["_id", "integer", "string"]'
+            sort='["_id"]'
+            data="{{myDB}}">
+    </app-pouchdb-query>
+
+    <template is="dom-repeat" items="[[myDB]]" as="profile">
+      <div>[[profile._id]]: [[profile.integer]] || [[profile.string]]</div>
+    </template>
 
     <app-localstorage-document key="my-profile-data" data="{{users}}"></app-localstorage-document>
     <app-localstorage-document id="loginUserStorage" session-only="true" key="login-data" data="{{loginUser}}"></app-localstorage-document>
@@ -76,20 +94,8 @@
       // could have some validation or conversion here
       addUser(object) {
           this.push('users', object);
-          this.firstDoc = {
-              docs : [
-                  {"_id": "0", "integer": 0, "string": "0"},
-                  {"_id": "1", "integer": 1, "string": "1"},
-                  {"_id": "2", "integer": 2, "string": "2"}
-              ]
-          };
-          this.secondDoc = {
-              docs : [
-                  {"_id": "00", "integer": 10, "string": "00"},
-                  {"_id": "11", "integer": 11, "string": "12"},
-                  {"_id": "22", "integer": 12, "string": "22"}
-              ]
-          };
+          this.firstDoc = {"_id": "0", "integer": 0, "string": "000"};
+          this.secondDoc = {"_id": "1", "integer": 1, "string": "111"};
       }
 
 
