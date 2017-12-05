@@ -1,8 +1,29 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+<link rel="import" href="../bower_components/app-pouchdb/app-pouchdb-document.html">
+<link rel="import" href="../bower_components/app-pouchdb/app-pouchdb-conflict-resolution.html">
+<link rel="import" href="../bower_components/app-pouchdb/app-pouchdb-query.html">
+<link rel="import" href="../bower_components/iron-input/iron-input.html">
 
 <dom-module id="my-profile-data">
   <template>
+    <app-pouchdb-conflict-resolution
+            strategy="firstWriteWins">
+    </app-pouchdb-conflict-resolution>
+
+
+    <app-pouchdb-document
+            db-name="my-profile"
+            doc-id="doc-1"
+            data="{{firstDoc}}">
+    </app-pouchdb-document>
+
+    <app-pouchdb-document
+            db-name="my-profile"
+            doc-id="dcc-2"
+            data="{{secondDoc}}">
+    </app-pouchdb-document>
+
     <app-localstorage-document key="my-profile-data" data="{{users}}"></app-localstorage-document>
     <app-localstorage-document id="loginUserStorage" session-only="true" key="login-data" data="{{loginUser}}"></app-localstorage-document>
   </template>
@@ -26,6 +47,14 @@
                 value: () => {},
                 notify: true,
                 reflectToAttribute: true
+            },
+            firstDoc: {
+                type: Object,
+                value: () => {}
+            },
+            secondDoc: {
+                type: Object,
+                value: () => {}
             }
         };
       }
@@ -47,7 +76,22 @@
       // could have some validation or conversion here
       addUser(object) {
           this.push('users', object);
+          this.firstDoc = {
+              docs : [
+                  {"_id": "0", "integer": 0, "string": "0"},
+                  {"_id": "1", "integer": 1, "string": "1"},
+                  {"_id": "2", "integer": 2, "string": "2"}
+              ]
+          };
+          this.secondDoc = {
+              docs : [
+                  {"_id": "00", "integer": 10, "string": "00"},
+                  {"_id": "11", "integer": 11, "string": "12"},
+                  {"_id": "22", "integer": 12, "string": "22"}
+              ]
+          };
       }
+
 
       logIn(username, password) {
           let user = this.users.find(x => x.username === username && x.password === password);
@@ -66,6 +110,7 @@
           this.loginUser = null;
           this.$.loginUserStorage.saveValue();
       }
+
     }
 
     window.customElements.define(MyProfileData.is, MyProfileData);
