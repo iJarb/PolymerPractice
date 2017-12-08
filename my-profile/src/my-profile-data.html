@@ -14,14 +14,19 @@
 
     <app-pouchdb-document
             db-name="profile"
-            doc-id="doc-1"
+            doc-id="doc-0"
             data="{{firstDoc}}">
     </app-pouchdb-document>
 
     <app-pouchdb-document
             db-name="profile"
-            doc-id="doc-2"
+            doc-id="doc-1"
             data="{{secondDoc}}">
+    </app-pouchdb-document>
+
+    <app-pouchdb-document
+          id="localPouchdb"
+          db-name="profile">
     </app-pouchdb-document>
 
     <!--<app-pouchdb-index-->
@@ -94,8 +99,10 @@
       // could have some validation or conversion here
       addUser(object) {
           this.push('users', object);
-          this.firstDoc = {"_id": "0", "integer": 0, "string": "000"};
-          this.secondDoc = {"_id": "1", "integer": 1, "string": "111"};
+          this.firstDoc = {"integer": 0, "string": "000"};
+          this.secondDoc = {"integer": 1, "string": "111"};
+          this.$.localPouchdb._post({"_id": "doc-2", "integer": 2, "string": "222"})
+          //this.$.localPouchdb._put("_doc_id_rev", {"_id": "5", "integer": 5, "string": "555"}, {"_id": "doc-2", "integer": 3, "string": "333"})
       }
 
 
