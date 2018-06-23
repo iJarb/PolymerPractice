@@ -2,6 +2,12 @@
 
 <head>
     <script src="node_modules/@webcomponents/webcomponents-bundle.js"></script>
+    <style>
+        .mood {
+            color: blue;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
@@ -16,7 +22,12 @@
 
             _render({ mood }) {
                 return html`
-                <style> .mood { color: green; } </style>
+                <style>
+                    .mood {
+                        color: red;
+                        font-weight: bold ;
+                    }
+                </style>
                 Web Components are <span class="mood">${mood}</span>!
                 `;
             }
@@ -27,6 +38,9 @@
     </script>
 
     <my-element mood="happy"></my-element>
+    <br/>
+    <div>Web Components has its own
+        <span class="mood">SCOPE of CSS</span>.</div>
 
 </body>
 
