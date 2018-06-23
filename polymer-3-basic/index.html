@@ -17,14 +17,17 @@
         class MyElement extends LitElement {
 
             static get properties() {
-                return { mood: String }
+                return {
+                    mood: String,
+                    color: String
+                }
             }
 
-            _render({ mood }) {
+            _render({ mood, color }) {
                 return html`
                 <style>
                     .mood {
-                        color: red;
+                        color: ${color};
                         font-weight: bold ;
                     }
                 </style>
@@ -37,11 +40,12 @@
         customElements.define('my-element', MyElement);
     </script>
 
-    <my-element mood="happy"></my-element>
+    <my-element mood="happy" color="red"></my-element>
     <br/>
     <div>Web Components has its own
         <span class="mood">SCOPE of CSS</span>.</div>
-
+    <br/>
+    <my-element mood="hopeful" color="green"></my-element>
 </body>
 
 </html>
