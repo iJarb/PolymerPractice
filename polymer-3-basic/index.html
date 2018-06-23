@@ -18,20 +18,21 @@
 
             static get properties() {
                 return {
-                    mood: String,
+                    size: String,
                     color: String
                 }
             }
 
-            _render({ mood, color }) {
+            _render({ size, color }) {
                 return html`
                 <style>
                     .mood {
                         color: ${color};
                         font-weight: bold ;
+                        font-size: ${size};
                     }
                 </style>
-                Web Components are <span class="mood">${mood}</span>!
+                <div class="mood"><slot></slot></div>
                 `;
             }
 
@@ -40,12 +41,14 @@
         customElements.define('my-element', MyElement);
     </script>
 
-    <my-element mood="happy" color="red"></my-element>
-    <br/>
+    <my-element size="1.5em" color="red">
+        <h1>This is my first component.</h1>
+    </my-element>
+    
     <div>Web Components has its own
         <span class="mood">SCOPE of CSS</span>.</div>
-    <br/>
-    <my-element mood="hopeful" color="green"></my-element>
+    
+    <my-element size="1.2em" color="green">This is my second component.</my-element>
 </body>
 
 </html>
