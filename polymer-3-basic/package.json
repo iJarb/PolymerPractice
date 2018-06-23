@@ -13,5 +13,7 @@
   ],
   "author": "tanbt",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "@polymer/lit-element": "^0.5.2"
+  }
 }
