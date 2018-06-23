@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <script src="node_modules/@webcomponents/webcomponents-bundle.js"></script>
+</head>
+
+<body>
+    <script type="module">
+        import { LitElement, html } from '@polymer/lit-element';
+
+        class MyElement extends LitElement {
+
+            static get properties() {
+                return { mood: String }
+            }
+
+            _render({ mood }) {
+                return html`
+                <style> .mood { color: green; } </style>
+                Web Components are <span class="mood">${mood}</span>!
+                `;
+            }
+
+        }
+
+        customElements.define('my-element', MyElement);
+    </script>
+
+    <my-element mood="happy"></my-element>
+
+</body>
+
+</html>
