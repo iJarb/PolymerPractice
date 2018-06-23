@@ -1,0 +1,17 @@
+{
+  "name": "polymer-3-basic",
+  "version": "1.0.0",
+  "description": "Polymer 3 basic practice with lit-element via udemy course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "polymer",
+    "3",
+    "lit-element"
+  ],
+  "author": "tanbt",
+  "license": "ISC",
+  "dependencies": {}
+}
