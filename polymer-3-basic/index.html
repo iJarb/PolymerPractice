@@ -32,20 +32,45 @@
                         font-size: ${size};
                     }
                 </style>
+                <my-navigation content="Header navigation" color="${color}">HEADER</my-navigation>
                 <div class="mood">
                     <slot name="header"><div>Default header</div></slot>
                     <slot name="content"></slot>
                     <slot name="footer"></slot>
                 </div>
                 <slot class="mood"></slot>
+                <my-navigation content="Footer navigation">FOOTER</my-navigation>
                 `;
             }
 
         }
 
+        class MyNavigation extends LitElement {
+            static get properties() {
+                return {
+                    content: String,
+                    color: String
+                }
+            }
+
+            _render({color, content}) {
+                return html`
+                <style>
+                    .nav {
+                        color: ${this.color};
+                        margin-top: 20px;
+                    }
+                </style>
+                <header class="nav">${this.content} | <slot></slot></header>
+                `
+            }
+        }
+
+        customElements.define('my-navigation', MyNavigation);
         customElements.define('my-element', MyElement);
     </script>
 
+    <my-navigation content="HOME">My Page navigation</my-navigation>
     <my-element size="1.5em" color="red">
         <div slot="header">This is the title.</div>
         <div slot="content">This is the content.</div>
