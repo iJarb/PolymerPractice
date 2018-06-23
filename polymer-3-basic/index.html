@@ -32,7 +32,12 @@
                         font-size: ${size};
                     }
                 </style>
-                <div class="mood"><slot></slot></div>
+                <div class="mood">
+                    <slot name="header"></slot>
+                    <slot name="content"></slot>
+                    <slot name="footer"></slot>
+                </div>
+                <slot class="mood"></slot>
                 `;
             }
 
@@ -42,12 +47,15 @@
     </script>
 
     <my-element size="1.5em" color="red">
-        <h1>This is my first component.</h1>
+        <div slot="header">This is the title.</div>
+        <div slot="content">This is the content.</div>
+        <div slot="footer">This is the footer.</div>
+
     </my-element>
-    
+
     <div>Web Components has its own
         <span class="mood">SCOPE of CSS</span>.</div>
-    
+
     <my-element size="1.2em" color="green">This is my second component.</my-element>
 </body>
 
