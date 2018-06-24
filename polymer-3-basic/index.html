@@ -31,6 +31,14 @@
                         font-weight: bold ;
                         font-size: ${size};
                     }
+                    .primary-btn {
+                        background-color: #00aaff;
+                        color: white;
+                        padding: 15px 25px;
+                        display: inline-block;
+                        border-radius: 10px;
+                        cursor: pointer;
+                    }
                 </style>
                 <my-navigation content="Header navigation" color="${color}">HEADER</my-navigation>
                 <div class="mood">
@@ -40,9 +48,13 @@
                 </div>
                 <slot class="mood"></slot>
                 <my-navigation content="Footer navigation">FOOTER</my-navigation>
+                <div class="primary-btn" on-click="${this.clickMe}">Click Me</div>
                 `;
             }
 
+            clickMe() {
+                console.log("clicked me.");
+            }
         }
 
         class MyNavigation extends LitElement {
@@ -53,7 +65,7 @@
                 }
             }
 
-            _render({color, content}) {
+            _render({ color, content }) {
                 return html`
                 <style>
                     .nav {
