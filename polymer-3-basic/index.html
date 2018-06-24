@@ -52,12 +52,21 @@
                 </div>
                 <slot class="mood"></slot>
                 <my-navigation content="Footer navigation">FOOTER</my-navigation>
-                <div class="primary-btn" on-click="${this.clickMe.bind(null, 1)}">Click Me</div>
+                <div class="primary-btn" id="primary-btn">Click Me</div>
                 `;
             }
 
-            clickMe(number) {
+            clickMe(event, number) {
                 console.log("clicked me.", number);
+            }
+
+            /**
+            * https://github.com/Polymer/lit-element/blob/master/README.md#api-documentation
+            */
+            _firstRendered(){
+                const primaryBtn = this._root.getElementById('primary-btn');
+                primaryBtn.addEventListener('click', e => this.clickMe(e, 1));
+                console.log(primaryBtn);
             }
         }
 
