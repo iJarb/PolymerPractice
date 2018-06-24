@@ -1,33 +1,26 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>phonebook-app demo</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <title>phonebook-app demo</title>
 
-    <script type="module">
-      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
-      import '@polymer/iron-demo-helpers/demo-snippet';
-    </script>
+  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script type="module" src="src/phonebook-app.js"></script>
 
-    <script type="module" src="src/phonebook-app.js"></script>
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+    </style>
+  </custom-style>
+</head>
 
-    <custom-style>
-      <style is="custom-style" include="demo-pages-shared-styles">
-      </style>
-    </custom-style>
-  </head>
-  <body>
-    <div class="vertical-section-container centered">
-      <h3>Basic phonebook-app demo</h3>
-      <demo-snippet>
-        <template>
-          <phonebook-app></phonebook-app>
-        </template>
-      </demo-snippet>
-    </div>
-  </body>
+<body>
+  <div class="vertical-section-container centered">
+    <h3>Basic phonebook-app demo</h3>
+    <phonebook-app data="world"></phonebook-app>
+  </div>
+</body>
+
 </html>
