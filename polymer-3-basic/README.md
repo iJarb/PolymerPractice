@@ -11,6 +11,7 @@ Following Udemy Polymer 3 course
 
 ## Deployment
 * polymer serve --open
+* build with default minifier: `polymer build --js-minify --css-minify --html-minify`
 
 ## References
 * ES6 backticks template string format
