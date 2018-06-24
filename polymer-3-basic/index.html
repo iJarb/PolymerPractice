@@ -15,6 +15,10 @@
         import { LitElement, html } from '@polymer/lit-element';
 
         class MyElement extends LitElement {
+            constructor() {
+                super();
+                this.clickMe = this.clickMe.bind(this);
+            }
 
             static get properties() {
                 return {
@@ -48,12 +52,12 @@
                 </div>
                 <slot class="mood"></slot>
                 <my-navigation content="Footer navigation">FOOTER</my-navigation>
-                <div class="primary-btn" on-click="${this.clickMe}">Click Me</div>
+                <div class="primary-btn" on-click="${this.clickMe.bind(null, 1)}">Click Me</div>
                 `;
             }
 
-            clickMe() {
-                console.log("clicked me.");
+            clickMe(number) {
+                console.log("clicked me.", number);
             }
         }
 
