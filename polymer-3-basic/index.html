@@ -2,6 +2,7 @@
 
 <head>
     <script src="node_modules/@webcomponents/webcomponents-bundle.js"></script>
+    <script type="module" src="src/my-calculator.js"></script>
     <style>
         .mood {
             color: blue;
@@ -94,6 +95,8 @@
         customElements.define('my-navigation', MyNavigation);
         customElements.define('my-element', MyElement);
     </script>
+
+    <my-calculator total="20"></my-calculator>
 
     <my-navigation content="HOME">My Page navigation</my-navigation>
     <my-element size="1.5em" color="red">
