@@ -1,5 +1,6 @@
 import {LitElement, html} from '@polymer/lit-element';
-import {} from './my-calculator.js';
+import SideMenu from './components/SideMenu.js';
+import ContentArea from './components/ContentArea';
 
 /**
  * `phonebook-app`
@@ -24,33 +25,9 @@ class PhonebookApp extends LitElement {
         }
       </style>
       <div class="main-page">
-        <section id="side-menu">
-          <div class="logo"></div>
-          <div class="menu">
-            <div class="title">Contacts</div>
-            <nav>
-              <a href="#">Add contact</a>
-              <a href="#">Add contact</a>
-              <a href="#">Add contact</a>
-              <a href="#">Add contact</a>
-            </nav>
-          </div>
-        </section>
-        
-        <section id="content-area">
-            <section class="contacts">
-                <h2>Contacts</h2>
-                <div class="contact">
-                    <div class="user-img"></div>
-                    <div class="fullname">Tan Bui</div>
-                    <div class="number">123 - 456 - 789</div>
-                    <div class="state">TUR</div>
-                    <div class="category">Work</div>
-                </div> 
-            </section>
-        </section>
+        <side-menu></side-menu>
+        <content-area></content-area>
       </div>
-      <!--<my-calculator></-calculator>-->
     `;
     }
 
