@@ -23,6 +23,11 @@ class PhonebookApp extends LitElement {
         :host {
           display: block;
         }
+        
+        .main-page {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+        }
       </style>
       <div class="main-page">
         <side-menu></side-menu>
