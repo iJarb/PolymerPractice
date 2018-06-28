@@ -8,6 +8,10 @@ export default class ContentArea extends LitElement {
         :host {
           display: block;
         }
+        #content-area {
+            background: #fcfdff;
+            padding: 50px 80px;
+        }
       </style>
     <section id="content-area">
         <contacts-list></contacts-list>
