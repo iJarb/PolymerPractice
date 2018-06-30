@@ -1,5 +1,6 @@
 import {LitElement, html} from '@polymer/lit-element';
 import ContactsList from './ContactsList.js'
+import FavoritesList from './FavoritesList.js'
 
 export default class ContentArea extends LitElement {
     _render({}) {
@@ -14,6 +15,7 @@ export default class ContentArea extends LitElement {
         }
       </style>
     <section id="content-area">
+        <favorites-list></favorites-list>
         <contacts-list></contacts-list>
     </section>
     `;
