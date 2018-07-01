@@ -11,10 +11,22 @@ import ContentArea from './components/ContentArea';
  * @demo demo/index.html
  */
 class PhonebookApp extends LitElement {
+    constructor() {
+        super();
+        this.addContactClick = this.addContactClick.bind(this);
+        this.popupOpen = false;
+    }
+
     static get properties() {
         return {
             data: String
         };
+    }
+
+    addContactClick() {
+        this.popupOpen = !this.popupOpen;
+        console.log(this.popupOpen);
+        this.requestRender();
     }
 
     _render({data}) {
@@ -30,8 +42,8 @@ class PhonebookApp extends LitElement {
         }
       </style>
       <div class="main-page">
-        <side-menu></side-menu>
-        <content-area></content-area>
+        <side-menu addContactClick="${this.addContactClick}"></side-menu>
+        <content-area popupOpen="${this.popupOpen}"></content-area>
       </div>
     `;
     }

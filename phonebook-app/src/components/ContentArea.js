@@ -4,6 +4,13 @@ import FavoritesList from './FavoritesList.js';
 import FormPopup from './FormPopup';
 
 export default class ContentArea extends LitElement {
+
+    static get properties() {
+        return {
+            popupOpen: Boolean
+        }
+    }
+
     _render({}) {
         return html`
       <style>
@@ -17,7 +24,7 @@ export default class ContentArea extends LitElement {
         }
       </style>
     <section id="content-area">
-        <form-popup></form-popup>
+        <form-popup popupOpen="${this.popupOpen}"></form-popup>
         <favorites-list></favorites-list>
         <contacts-list></contacts-list>
     </section>

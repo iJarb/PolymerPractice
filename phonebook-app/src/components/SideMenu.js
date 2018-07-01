@@ -2,6 +2,12 @@ import {LitElement, html} from '@polymer/lit-element';
 
 export default class SideMenu extends LitElement {
 
+    static get properties() {
+        return {
+            addContactClick: Function
+        }
+    }
+
     _render({}) {
         return html`
       <style>
@@ -46,7 +52,7 @@ export default class SideMenu extends LitElement {
           <div class="menu">
             <div class="title">Contacts</div>
             <nav>
-              <a href="#"><span class="icon"> + </span> Add contact</a>
+              <a href="#" on-click="${this.addContactClick}"><span class="icon"> + </span> Add contact</a>
               <a href="#"><span class="icon"> + </span> Add contact</a>
               <a href="#"><span class="icon"> + </span> Add contact</a>
               <a href="#"><span class="icon"> + </span> Add contact</a>
