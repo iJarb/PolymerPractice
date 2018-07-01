@@ -4,6 +4,7 @@ export default class ContactsList extends LitElement {
     _render({}) {
         return html`
       <style>
+        @import '/assets/css/global.css';
         :host {
           display: block;
         }

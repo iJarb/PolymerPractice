@@ -5,7 +5,7 @@ export default class SideMenu extends LitElement {
     _render({}) {
         return html`
       <style>
-      
+        @import '/assets/css/global.css';
         :host {
           display: block;
         }
