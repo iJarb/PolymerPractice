@@ -21,7 +21,7 @@ export default class FormPopup extends LitElement {
         let name = event.target.name;
         let value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value
 
-        formData[name] = value
+        formData[name] = value;
         this.formData = Object.assign(this.formData, formData);
     }
 

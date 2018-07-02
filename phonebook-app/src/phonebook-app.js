@@ -36,6 +36,8 @@ class PhonebookApp extends LitElement {
         event.preventDefault();
 
         function immutablePush(arr, newEntry){
+            let v = {};
+            newEntry = Object.assign(v, newEntry);
             return [ ...arr, newEntry ]
         }
         this.allContacts = immutablePush(this.allContacts, contact);
