@@ -15,11 +15,14 @@ class PhonebookApp extends LitElement {
         super();
         this.togglePopup = this.togglePopup.bind(this);
         this.popupOpen = false;
+        this.allContacts = [];
+        this.saveContact = this.saveContact.bind(this);
     }
 
     static get properties() {
         return {
-            popupOpen: Boolean
+            popupOpen: Boolean,
+            allContacts: Array
         };
     }
 
@@ -27,6 +30,16 @@ class PhonebookApp extends LitElement {
         this.popupOpen = !this.popupOpen;
         console.log(this.popupOpen);
         //this.requestRender(); //popupOpen is a property so don't need to call requestRender()
+    }
+
+    saveContact(contact, event) {
+        event.preventDefault();
+
+        function immutablePush(arr, newEntry){
+            return [ ...arr, newEntry ]
+        }
+        this.allContacts = immutablePush(this.allContacts, contact);
+        console.log(this.allContacts);
     }
 
     _render({data}) {
@@ -43,7 +56,7 @@ class PhonebookApp extends LitElement {
       </style>
       <div class="main-page">
         <side-menu togglePopup="${this.togglePopup}"></side-menu>
-        <content-area popupOpen="${this.popupOpen}" togglePopup="${this.togglePopup}"></content-area>
+        <content-area popupOpen="${this.popupOpen}" togglePopup="${this.togglePopup}" saveContact="${this.saveContact}"></content-area>
       </div>
     `;
     }
