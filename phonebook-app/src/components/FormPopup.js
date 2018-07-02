@@ -2,11 +2,28 @@ import {LitElement, html} from '@polymer/lit-element';
 
 export default class FormPopup extends LitElement {
 
+    constructor() {
+        super();
+        this.formData = {};
+        this.change = this.change.bind(this);
+    }
+
     static get properties() {
         return {
             popupOpen: Boolean,
-            togglePopup: Function
+            togglePopup: Function,
+            formData: Object,
         }
+    }
+
+    change(event){
+        let formData = {};
+        let name = event.target.name;
+        let value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value
+
+        formData[name] = value
+        this.formData = Object.assign(this.formData, formData);
+        console.log(this.formData);
     }
 
     _render({}) {
@@ -116,31 +133,31 @@ export default class FormPopup extends LitElement {
             <h2>Add a new contact</h2>
             <div class="form-group first-name">
                 <label for="first_name">First Name</label>
-                <input type="text" name="first_name">
+                <input type="text" name="first_name" on-keyup="${this.change}">
             </div>
             <div class="form-group last-name">
                 <label for="last_name">Last Name</label>
-                <input type="text" name="last_name">
+                <input type="text" name="last_name" on-keyup="${this.change}">
             </div>
             <div class="form-group address-1">
                 <label for="address_1">Address #1</label>
-                <input type="text" name="address_1">
+                <input type="text" name="address_1" on-keyup="${this.change}">
             </div>
             <div class="form-group address-2">
                 <label for="address_2">Address #2</label>
-                <input type="text" name="address_2">
+                <input type="text" name="address_2" on-keyup="${this.change}">
             </div>
             <div class="form-group city">
                 <label for="city">City</label>
-                <input type="text" name="city">
+                <input type="text" name="city" on-keyup="${this.change}">
             </div>
             <div class="form-group state">
                 <label for="state">State</label>
-                <input type="text" name="state">
+                <input type="text" name="state" on-keyup="${this.change}">
             </div>
             <div class="form-group zipcode">
                 <label for="zipcode">Zipcode</label>
-                <input type="text" name="zipcode">
+                <input type="text" name="zipcode" on-keyup="${this.change}">
             </div>
             <div class="form-group button">
                 <button type="submit">Add</button>

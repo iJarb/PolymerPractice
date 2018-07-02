@@ -19,14 +19,14 @@ class PhonebookApp extends LitElement {
 
     static get properties() {
         return {
-            data: String
+            popupOpen: Boolean
         };
     }
 
     togglePopup() {
         this.popupOpen = !this.popupOpen;
         console.log(this.popupOpen);
-        this.requestRender();
+        //this.requestRender(); //popupOpen is a property so don't need to call requestRender()
     }
 
     _render({data}) {
