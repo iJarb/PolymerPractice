@@ -28,13 +28,11 @@ class PhonebookApp extends LitElement {
 
     togglePopup() {
         this.popupOpen = !this.popupOpen;
-        console.log(this.popupOpen);
+        //console.log(this.popupOpen);
         //this.requestRender(); //popupOpen is a property so don't need to call requestRender()
     }
 
-    saveContact(contact, event) {
-        event.preventDefault();
-
+    saveContact(contact) {
         function immutablePush(arr, newEntry){
             let v = {};
             newEntry = Object.assign(v, newEntry);
@@ -58,7 +56,7 @@ class PhonebookApp extends LitElement {
       </style>
       <div class="main-page">
         <side-menu togglePopup="${this.togglePopup}"></side-menu>
-        <content-area popupOpen="${this.popupOpen}" togglePopup="${this.togglePopup}" saveContact="${this.saveContact}"></content-area>
+        <content-area popupOpen="${this.popupOpen}" togglePopup="${this.togglePopup}" saveContact="${this.saveContact}" allContacts="${this.allContacts}"></content-area>
       </div>
     `;
     }

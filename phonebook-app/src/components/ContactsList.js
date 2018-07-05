@@ -1,6 +1,44 @@
 import {LitElement, html} from '@polymer/lit-element';
 
 export default class ContactsList extends LitElement {
+
+    constructor() {
+        super();
+        this.displayAllContacts = this.displayAllContacts.bind(this);
+    }
+
+    static get properties() {
+        return {
+            allContacts: Array
+        }
+    }
+
+    displayAllContacts() {
+        return this.allContacts.map(() => {
+            return html`
+            <div class="contact">
+                <div class="user-img"></div>
+                <div class="fullname">
+                    <span class="text">Tan Bui</span>
+                    <span class="sub">Full name</span>
+                </div>
+                <div class="number">
+                    <span class="text">123 - 456 - 789</span>
+                    <span class="sub">Phone</span>    
+                </div>
+                <div class="state">
+                    <span class="text">TUR</span>
+                    <span class="sub">State</span>    
+                </div>
+                <div class="category">
+                    <span class="text">Work</span>
+                    <span class="sub">Category</span>    
+                </div>
+            </div> 
+        `;
+        });
+    }
+
     _render({}) {
         return html`
       <style>
@@ -65,45 +103,7 @@ export default class ContactsList extends LitElement {
       </style>
         <section class="contacts">
             <h2>Contacts</h2>
-            <div class="contact">
-                <div class="user-img"></div>
-                <div class="fullname">
-                    <span class="text">Tan Bui</span>
-                    <span class="sub">Full name</span>
-                </div>
-                <div class="number">
-                    <span class="text">123 - 456 - 789</span>
-                    <span class="sub">Phone</span>    
-                </div>
-                <div class="state">
-                    <span class="text">TUR</span>
-                    <span class="sub">State</span>    
-                </div>
-                <div class="category">
-                    <span class="text">Work</span>
-                    <span class="sub">Category</span>    
-                </div>
-            </div> 
-            
-            <div class="contact">
-                <div class="user-img"></div>
-                <div class="fullname">
-                    <span class="text">Tan Bui</span>
-                    <span class="sub">Full name</span>
-                </div>
-                <div class="number">
-                    <span class="text">123 - 456 - 789</span>
-                    <span class="sub">Phone</span>    
-                </div>
-                <div class="state">
-                    <span class="text">TUR</span>
-                    <span class="sub">State</span>    
-                </div>
-                <div class="category">
-                    <span class="text">Work</span>
-                    <span class="sub">Category</span>    
-                </div>
-            </div> 
+            ${this.displayAllContacts()}
         </section>
     `;
     }
