@@ -26,6 +26,7 @@ class PhonebookApp extends LitElement {
             zipcode:"20540"
         }];
         this.saveContact = this.saveContact.bind(this);
+        this.removeContact = this.removeContact.bind(this);
     }
 
     static get properties() {
@@ -52,6 +53,14 @@ class PhonebookApp extends LitElement {
         console.log(this.allContacts);
     }
 
+    removeContact(index) {
+        function immutableRemove(arr, index) {
+            return arr.slice(0, index).concat(arr.slice(index+1));
+        }
+        this.allContacts = immutableRemove(this.allContacts, index);
+        console.log("Removed: " + index);
+    }
+
     _render({data}) {
         return html`
       <style>
@@ -66,7 +75,8 @@ class PhonebookApp extends LitElement {
       </style>
       <div class="main-page">
         <side-menu togglePopup="${this.togglePopup}"></side-menu>
-        <content-area popupOpen="${this.popupOpen}" togglePopup="${this.togglePopup}" saveContact="${this.saveContact}" allContacts="${this.allContacts}"></content-area>
+        <content-area popupOpen="${this.popupOpen}" togglePopup="${this.togglePopup}" 
+            saveContact="${this.saveContact}" allContacts="${this.allContacts}" removeContact="${this.removeContact}"></content-area>
       </div>
     `;
     }
