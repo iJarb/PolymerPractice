@@ -20,6 +20,19 @@ export default class FormPopup extends LitElement {
     submitForm(event) {
         event.preventDefault();
         this.saveContact(this.formData);
+        this.formData = {};
+        this._clearForm();
+    }
+
+    _clearForm() {
+        var inputs = this._root.querySelectorAll('input');
+        inputs.forEach(i => {
+           if(i.type == 'text') {
+               i.value = '';
+           } else if(i.type == 'checkbox') {
+               i.checked = false;
+           }
+        });
     }
 
     change(event){
