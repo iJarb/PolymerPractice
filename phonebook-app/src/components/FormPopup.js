@@ -25,7 +25,7 @@ export default class FormPopup extends LitElement {
     change(event){
         let formData = {};
         let name = event.target.name;
-        let value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value
+        let value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value;
 
         formData[name] = value;
         this.formData = Object.assign(this.formData, formData);
@@ -85,10 +85,10 @@ export default class FormPopup extends LitElement {
             width: 100%;
         }
         .first-name {
-            grid-column: 1/3;
+            grid-column: 1/3;   /*from col 1 to col 3*/
         }
         .last-name {
-            grid-column: 3/5;
+            grid-column: 3/5;   /*from col 3 to col 5*/
         }
         .address-1 {
             grid-column: 1/5;
@@ -102,6 +102,10 @@ export default class FormPopup extends LitElement {
         .button {
             justify-self: end;
             grid-column: 4/5
+        }
+        .question {
+            justify-self: start;
+            grid-column: 1/4
         }
         .button button {
             cursor: pointer;
@@ -163,6 +167,10 @@ export default class FormPopup extends LitElement {
             <div class="form-group zipcode">
                 <label for="zipcode">Zipcode</label>
                 <input type="text" name="zipcode" on-keyup="${this.change}">
+            </div>
+            <div class="form-group question">
+                <input type="checkbox" id="is-favorite" name="favorite" on-change="${this.change}">
+                <label for="is-favorite" style="top: 0">Is Favorite?</label>
             </div>
             <div class="form-group button">
                 <button type="submit">Add</button>

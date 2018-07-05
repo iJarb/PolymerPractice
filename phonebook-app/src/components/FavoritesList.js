@@ -1,6 +1,46 @@
 import {LitElement, html} from '@polymer/lit-element';
 
 export default class FavoritesList extends LitElement {
+
+    constructor() {
+        super();
+        this.displayFavoriteContacts = this.displayFavoriteContacts.bind(this);
+    }
+
+    static get properties() {
+        return {
+            allContacts: Array
+        }
+    }
+
+    displayFavoriteContacts() {
+        return this.allContacts.map((contact) => {
+            if (contact.favorite) {
+                return html`
+                <div class="card">
+                    <div class="user-img"></div>
+                    <div class="fullname">
+                        <span class="text">${contact.first_name} ${contact.last_name}</span>
+                        <span class="sub">Full name</span>
+                    </div>
+                    <div class="number">
+                        <span class="text">${contact.address_1}</span>
+                        <span class="sub">Address</span>
+                    </div>
+                    <div class="state">
+                        <span class="text">${contact.state}</span>
+                        <span class="sub">State</span>   
+                    </div>
+                    <div class="category">
+                        <span class="text">${contact.zipcode}</span>
+                        <span class="sub">Zipcode</span>     
+                    </div>
+                </div> 
+                `;
+            }
+        });
+    }
+
     _render({}) {
         return html`
       <style>
@@ -80,63 +120,7 @@ export default class FavoritesList extends LitElement {
       </style>
         <section class="favorites">
             <h2>Favorites</h2>
-            <div class="card">
-                <div class="user-img"></div>
-                <div class="fullname">
-                    <span class="text">Tan Bui</span>
-                    <span class="sub">Full name</span>
-                </div>
-                <div class="number">
-                    <span class="text">123 - 456 - 789</span>
-                    <span class="sub">Phone</span>    
-                </div>
-                <div class="state">
-                    <span class="text">TUR</span>
-                    <span class="sub">State</span>    
-                </div>
-                <div class="category">
-                    <span class="text">Work</span>
-                    <span class="sub">Category</span>    
-                </div>
-            </div> 
-            <div class="card">
-                <div class="user-img"></div>
-                <div class="fullname">
-                    <span class="text">Tan Bui</span>
-                    <span class="sub">Full name</span>
-                </div>
-                <div class="number">
-                    <span class="text">123 - 456 - 789</span>
-                    <span class="sub">Phone</span>    
-                </div>
-                <div class="state">
-                    <span class="text">TUR</span>
-                    <span class="sub">State</span>    
-                </div>
-                <div class="category">
-                    <span class="text">Work</span>
-                    <span class="sub">Category</span>    
-                </div>
-            </div> 
-            <div class="card">
-                <div class="user-img"></div>
-                <div class="fullname">
-                    <span class="text">Tan Bui</span>
-                    <span class="sub">Full name</span>
-                </div>
-                <div class="number">
-                    <span class="text">123 - 456 - 789</span>
-                    <span class="sub">Phone</span>    
-                </div>
-                <div class="state">
-                    <span class="text">TUR</span>
-                    <span class="sub">State</span>    
-                </div>
-                <div class="category">
-                    <span class="text">Work</span>
-                    <span class="sub">Category</span>    
-                </div>
-            </div> 
+            ${this.displayFavoriteContacts()}
         </section>
     `;
     }

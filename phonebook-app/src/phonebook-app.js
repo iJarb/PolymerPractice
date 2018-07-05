@@ -39,6 +39,7 @@ class PhonebookApp extends LitElement {
             return [ ...arr, newEntry ]
         }
         this.allContacts = immutablePush(this.allContacts, contact);
+        this.togglePopup();
         console.log(this.allContacts);
     }
 

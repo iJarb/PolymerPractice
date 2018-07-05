@@ -14,25 +14,25 @@ export default class ContactsList extends LitElement {
     }
 
     displayAllContacts() {
-        return this.allContacts.map(() => {
+        return this.allContacts.map((contact) => {
             return html`
             <div class="contact">
                 <div class="user-img"></div>
                 <div class="fullname">
-                    <span class="text">Tan Bui</span>
+                    <span class="text">${contact.first_name} ${contact.last_name}</span>
                     <span class="sub">Full name</span>
                 </div>
                 <div class="number">
-                    <span class="text">123 - 456 - 789</span>
-                    <span class="sub">Phone</span>    
+                    <span class="text">${contact.address_1}</span>
+                    <span class="sub">Address</span>    
                 </div>
                 <div class="state">
-                    <span class="text">TUR</span>
+                    <span class="text">${contact.state}</span>
                     <span class="sub">State</span>    
                 </div>
                 <div class="category">
-                    <span class="text">Work</span>
-                    <span class="sub">Category</span>    
+                    <span class="text">${contact.zipcode}</span>
+                    <span class="sub">Zipcode</span>    
                 </div>
             </div> 
         `;
