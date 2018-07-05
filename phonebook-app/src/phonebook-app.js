@@ -15,7 +15,16 @@ class PhonebookApp extends LitElement {
         super();
         this.togglePopup = this.togglePopup.bind(this);
         this.popupOpen = false;
-        this.allContacts = [];
+        this.allContacts = [{
+            address_1: "6D, 6, Yo-kyla",
+            address_2: "second address",
+            city: "Turku",
+            favorite: true,
+            first_name: "Tan",
+            last_name: "Bui",
+            state: "TUK",
+            zipcode:"20540"
+        }];
         this.saveContact = this.saveContact.bind(this);
     }
 
