@@ -49,6 +49,7 @@
         var cal = this.$.calender;
         cal.addEventListener('event-resize', (e)=>this._onEventResize(e));
         cal.addEventListener('event-drop', (e)=>this._onEventDrop(e));
+        cal.addEventListener('event-click', (e)=>this._onEventClick(e));
       }
 
       connectedCallback() {
@@ -56,7 +57,7 @@
         Polymer.RenderStatus.afterNextRender(this, function() {
           this.data = [
             {"title" : "event1","start" : "2018-08-06"},
-            {"title" : "event2","start" : "2018-08-10T12:30:00","end" : "2018-08-10T16:30:00"},
+            {"id": "123", "title" : "event2","start" : "2018-08-10T12:30:00","end" : "2018-08-10T16:30:00"},
             {"title" : "event3","start" : "2018-08-11T12:30:00","allDay" :false},
             {"title" : "event2","start" : "2018-08-16T12:30:00","end" : "2018-08-16T16:30:00"},
             {"title" : "event3","start" : "2018-08-15T12:30:00","allDay" :false}];
@@ -81,9 +82,17 @@
         console.log(e, this.data);
       }
       _addEvent() {
-        let newEvent = {"title" : "eventNew","start" : "2018-08-09T11:30:00","end" : "2018-08-09T15:30:00"};
-        this.data.push(newEvent);
+        let newEvent = {"id": "345", "title" : "eventNew","start" : "2018-08-09T11:30:00","end" : "2018-08-09T15:30:00"};
+        this.data = this._immutablePush(this.data, newEvent);
         console.log(this.data);
+      }
+      _onEventClick(e) {
+        console.log("Click: ", e);
+      }
+      _immutablePush(arr, newEntry){
+        let v = {};
+        newEntry = Object.assign(v, newEntry);
+        return [ ...arr, newEntry ]
       }
     }
 
