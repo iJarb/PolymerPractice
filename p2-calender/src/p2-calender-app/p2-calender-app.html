@@ -1,0 +1,92 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/scheduler-component/scheduler-component.html">
+<link rel="import" href="../../bower_components/polymer/lib/utils/render-status.html">
+
+<dom-module id="p2-calender-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+    <scheduler-component id="calender"
+        default-view="agendaWeek"
+        editable week-numbers
+        max-time="18:00:00" min-time="07:00:00"
+        event-color="#8e44ad"
+        text-color="#ecf0f1"
+        events='{{data}}'
+          header='{"center":"title","left":"prev,next,today","right":"month,agendaWeek,agendaDay"}'>
+    </scheduler-component>
+    <button on-click="_goNext">Next</button>
+    <button on-click="_addEvent">Add Event</button>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class P2CalenderApp extends Polymer.Element {
+      static get is() { return 'p2-calender-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'p2-calender-app'
+          },
+          data: {
+            type: Array,
+            value: [],
+            notify: true
+          }
+        };
+      }
+
+      ready() {
+        super.ready();
+        var cal = this.$.calender;
+        cal.addEventListener('event-resize', (e)=>this._onEventResize(e));
+        cal.addEventListener('event-drop', (e)=>this._onEventDrop(e));
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        Polymer.RenderStatus.afterNextRender(this, function() {
+          this.data = [
+            {"title" : "event1","start" : "2018-08-06"},
+            {"title" : "event2","start" : "2018-08-10T12:30:00","end" : "2018-08-10T16:30:00"},
+            {"title" : "event3","start" : "2018-08-11T12:30:00","allDay" :false},
+            {"title" : "event2","start" : "2018-08-16T12:30:00","end" : "2018-08-16T16:30:00"},
+            {"title" : "event3","start" : "2018-08-15T12:30:00","allDay" :false}];
+          this._refresh();
+        });
+      }
+
+      _goNext() {
+        var cal = this.$.calender;
+        cal.next();
+      }
+
+      _refresh() {
+        var cal = this.$.calender;
+        cal.next();
+        cal.prev();
+      }
+      _onEventResize(e) {
+        console.log(e.detail.event.start, " - ", e.detail.event.end); //month counts from 0
+      }
+      _onEventDrop(e) {
+        console.log(e, this.data);
+      }
+      _addEvent() {
+        let newEvent = {"title" : "eventNew","start" : "2018-08-09T11:30:00","end" : "2018-08-09T15:30:00"};
+        this.data.push(newEvent);
+        console.log(this.data);
+      }
+    }
+
+    window.customElements.define(P2CalenderApp.is, P2CalenderApp);
+  </script>
+</dom-module>

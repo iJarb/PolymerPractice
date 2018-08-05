@@ -1,0 +1,6 @@
+{
+  "name": "p2-calender",
+  "short_name": "p2-calender",
+  "start_url": "/",
+  "display": "standalone"
+}
