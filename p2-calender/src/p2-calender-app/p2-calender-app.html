@@ -1,12 +1,19 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/scheduler-component/scheduler-component.html">
 <link rel="import" href="../../bower_components/polymer/lib/utils/render-status.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 
 <dom-module id="p2-calender-app">
   <template>
     <style>
       :host {
         display: block;
+        --paper-toast-background-color: #555;
+        --paper-toast-color: blue;
+      }
+      #dayClickToastStart a {
+        color: yellow;
+        text-decoration: none;
       }
     </style>
     <h2>Hello [[prop1]]!</h2>
@@ -21,6 +28,17 @@
     </scheduler-component>
     <button on-click="_goNext">Next</button>
     <button on-click="_addEvent">Add Event</button>
+    <paper-toast id="dayClickToastStart" duration="0" text="">
+        You selected [[fromTimeClick.date]] at [[fromTimeClick.time]].<br/>
+        Please click on the same day for the end time of your booking.
+      </paper-toast>
+      <paper-toast id="dayClickToastEnd" duration="0" text="">
+          Date: [[fromTimeClick.date]]<br/>
+          From: [[fromTimeClick.time]].<br/>
+          To: [[toTimeClick.time]].<br/>
+          <input type="text" name="booking-title" placeholder="Please enter your title"/>
+          <a href="#" on-click="_toggleToast">(Close)</a>
+      </paper-toast>
   </template>
 
   <script>
@@ -40,6 +58,14 @@
             type: Array,
             value: [],
             notify: true
+          },
+          fromTimeClick: {
+            type: Object,
+            value: () => {}
+          },
+          toTimeClick: {
+            type: Object,
+            value: () => {}
           }
         };
       }
@@ -50,6 +76,10 @@
         cal.addEventListener('event-resize', (e)=>this._onEventResize(e));
         cal.addEventListener('event-drop', (e)=>this._onEventDrop(e));
         cal.addEventListener('event-click', (e)=>this._onEventClick(e));
+        cal.addEventListener('day-click', (e)=>this._onDayClick(e));
+        /*cal.addEventListener('event-drag-start', (e)=>this._onDragStart(e));
+        cal.addEventListener('event-drag-end', (e)=>this._onDragEnd(e));
+        cal.addEventListener('event-mouse-over', (e)=>this._onMouseOver(e));*/
       }
 
       connectedCallback() {
@@ -93,6 +123,56 @@
         let v = {};
         newEntry = Object.assign(v, newEntry);
         return [ ...arr, newEntry ]
+      }
+      _onDayClick(e){
+        console.log("day click:", e, this.fromTimeClick, this.toTimeClick);
+        let arrData = e.detail.date._i;
+        if (this.fromTimeClick === undefined || this.fromTimeClick === null) {
+          this.fromTimeClick = this._convertDayClickData(arrData);
+          this.$.dayClickToastStart.open();
+        } else {
+          this.toTimeClick = this._convertDayClickData(arrData);
+          if (this.toTimeClick.date !== this.fromTimeClick.date) {
+            this.toTimeClick = null;
+            this.fromTimeClick = null;
+            this.$.dayClickToastStart.toggle();
+          } else {
+            this.$.dayClickToastEnd.open();
+          }
+        }
+      }
+
+      _convertDayClickData(arr) {
+        arr[1]++;
+        for(let i = 0; i<arr.length; i++) {
+          arr[i] = this._addZeroBefore(arr[i]);;
+        }
+        let date = arr[0] + "-" + arr[1] + "-" + arr[2];
+        let time = arr[3] + ":" + arr[4] + ":" + arr[5];
+        return {
+          "date": date,
+          "time": time
+        };
+      }
+
+      _addZeroBefore(n) {
+        return (n < 10) ? "0" + n : n;
+      }
+
+      _toggleToast(e) {
+        this.$.dayClickToastEnd.toggle();
+        this.toTimeClick = null;
+        this.fromTimeClick = null;
+      }
+
+      _onDragStart(e){
+        console.log("Drag start:", e);
+      }
+      _onDragEnd(e){
+        console.log("Drag end:", e);
+      }
+      _onMouseOver(e){
+        console.log("Mouse over:", e);
       }
     }
 
