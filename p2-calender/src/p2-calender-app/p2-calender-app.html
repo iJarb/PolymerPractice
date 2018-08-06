@@ -2,18 +2,32 @@
 <link rel="import" href="../../bower_components/scheduler-component/scheduler-component.html">
 <link rel="import" href="../../bower_components/polymer/lib/utils/render-status.html">
 <link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+
 
 <dom-module id="p2-calender-app">
   <template>
     <style>
       :host {
         display: block;
-        --paper-toast-background-color: #555;
-        --paper-toast-color: blue;
+        --paper-toast-background-color: #EEE;
       }
-      #dayClickToastStart a {
-        color: yellow;
-        text-decoration: none;
+      .booking-toast {
+        color: #333;
+        font-size: 1.2em;
+        line-height: 150%;
+      }
+      #cancelCreateEventBtn{
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+      }
+      #eventNameInput {
+        width: 300px;
+        margin: 15px 0;
       }
     </style>
     <h2>Hello [[prop1]]!</h2>
@@ -28,16 +42,18 @@
     </scheduler-component>
     <button on-click="_goNext">Next</button>
     <button on-click="_addEvent">Add Event</button>
-    <paper-toast id="dayClickToastStart" duration="0" text="">
+    <paper-toast id="dayClickToastStart" class="booking-toast" duration="0" text="">
         You selected [[fromTimeClick.date]] at [[fromTimeClick.time]].<br/>
         Please click on the same day for the end time of your booking.
       </paper-toast>
-      <paper-toast id="dayClickToastEnd" duration="0" text="">
+      <paper-toast id="dayClickToastEnd" class="booking-toast" duration="0" text="">
           Date: [[fromTimeClick.date]]<br/>
-          From: [[fromTimeClick.time]].<br/>
-          To: [[toTimeClick.time]].<br/>
-          <input type="text" name="booking-title" placeholder="Please enter your title"/>
-          <a href="#" on-click="_toggleToast">(Close)</a>
+          From: [[fromTimeClick.time]]<br/>
+          To: [[toTimeClick.time]]<br/>
+
+          <paper-input label="Enter an event name..." id="eventNameInput"></paper-input>
+          <paper-button raised id="createEventBtn">Create</paper-button>
+          <iron-icon id="cancelCreateEventBtn" icon="icons:remove-circle" on-click="_toggleToast"></iron-icon>
       </paper-toast>
   </template>
 
@@ -88,6 +104,7 @@
           this.data = [
             {"title" : "event1","start" : "2018-08-06"},
             {"id": "123", "title" : "event2","start" : "2018-08-10T12:30:00","end" : "2018-08-10T16:30:00"},
+            {"id": "123", "title" : "event2","start" : "2018-08-08T10:30:00","end" : "2018-08-08T08:30:00"},
             {"title" : "event3","start" : "2018-08-11T12:30:00","allDay" :false},
             {"title" : "event2","start" : "2018-08-16T12:30:00","end" : "2018-08-16T16:30:00"},
             {"title" : "event3","start" : "2018-08-15T12:30:00","allDay" :false}];
@@ -125,7 +142,6 @@
         return [ ...arr, newEntry ]
       }
       _onDayClick(e){
-        console.log("day click:", e, this.fromTimeClick, this.toTimeClick);
         let arrData = e.detail.date._i;
         if (this.fromTimeClick === undefined || this.fromTimeClick === null) {
           this.fromTimeClick = this._convertDayClickData(arrData);
@@ -133,17 +149,20 @@
         } else {
           this.toTimeClick = this._convertDayClickData(arrData);
           if (this.toTimeClick.date !== this.fromTimeClick.date) {
-            this.toTimeClick = null;
-            this.fromTimeClick = null;
-            this.$.dayClickToastStart.toggle();
+            this._toggleAndClearStartToast();
           } else {
-            this.$.dayClickToastEnd.open();
+            if (this._compareTimeInArray(this.fromTimeClick.data, this.toTimeClick.data)) {
+              this.$.dayClickToastEnd.open();
+            } else {
+              this._toggleAndClearStartToast();
+            }
           }
         }
       }
 
       _convertDayClickData(arr) {
         arr[1]++;
+        let copyArr = arr.slice(0);
         for(let i = 0; i<arr.length; i++) {
           arr[i] = this._addZeroBefore(arr[i]);;
         }
@@ -151,7 +170,8 @@
         let time = arr[3] + ":" + arr[4] + ":" + arr[5];
         return {
           "date": date,
-          "time": time
+          "time": time,
+          "data": copyArr
         };
       }
 
@@ -159,10 +179,31 @@
         return (n < 10) ? "0" + n : n;
       }
 
+    /**
+      return TRUE if time of arr1 is earlier than arr2
+    */
+      _compareTimeInArray(arr1, arr2) {
+          let h1 = arr1[3];
+          let m1 = arr1[4];
+          let h2 = arr2[3];
+          let m2 = arr2[4];
+          if (h1 < h2) {
+            return true;
+          } else if(h1 === h2 && m1 < m2) {
+            return true;
+          }
+          return false;
+      }
+
       _toggleToast(e) {
         this.$.dayClickToastEnd.toggle();
         this.toTimeClick = null;
         this.fromTimeClick = null;
+      }
+      _toggleAndClearStartToast() {
+        this.toTimeClick = null;
+        this.fromTimeClick = null;
+        this.$.dayClickToastStart.toggle();
       }
 
       _onDragStart(e){
