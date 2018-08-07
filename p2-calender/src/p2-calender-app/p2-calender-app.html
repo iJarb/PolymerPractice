@@ -46,14 +46,14 @@
         You selected [[fromTimeClick.date]] at [[fromTimeClick.time]].<br/>
         Please click on the same day for the end time of your booking.
       </paper-toast>
-      <paper-toast id="dayClickToastEnd" class="booking-toast" duration="0" text="">
+      <paper-toast id="dayClickToastEnd" class="booking-toast" duration="0" text="" no-cancel-on-esc-key="true">
           Date: [[fromTimeClick.date]]<br/>
           From: [[fromTimeClick.time]]<br/>
           To: [[toTimeClick.time]]<br/>
 
-          <paper-input label="Enter an event name..." id="eventNameInput"></paper-input>
-          <paper-button raised id="createEventBtn">Create</paper-button>
-          <iron-icon id="cancelCreateEventBtn" icon="icons:remove-circle" on-click="_toggleToast"></iron-icon>
+          <paper-input label="Enter an event name..." id="eventNameInput" autofocus="true"></paper-input>
+          <paper-button raised id="createEventBtn" on-tap="_createEvent">Create</paper-button>
+          <iron-icon id="cancelCreateEventBtn" icon="icons:remove-circle" on-click="_toggleEndToast"></iron-icon>
       </paper-toast>
   </template>
 
@@ -131,7 +131,6 @@
       _addEvent() {
         let newEvent = {"id": "345", "title" : "eventNew","start" : "2018-08-09T11:30:00","end" : "2018-08-09T15:30:00"};
         this.data = this._immutablePush(this.data, newEvent);
-        console.log(this.data);
       }
       _onEventClick(e) {
         console.log("Click: ", e);
@@ -153,6 +152,7 @@
           } else {
             if (this._compareTimeInArray(this.fromTimeClick.data, this.toTimeClick.data)) {
               this.$.dayClickToastEnd.open();
+              this.$.eventNameInput.focus();
             } else {
               this._toggleAndClearStartToast();
             }
@@ -195,15 +195,30 @@
           return false;
       }
 
-      _toggleToast(e) {
+      _toggleEndToast() {
         this.$.dayClickToastEnd.toggle();
-        this.toTimeClick = null;
-        this.fromTimeClick = null;
+        this._clearBookingCache();
       }
       _toggleAndClearStartToast() {
+        this.$.dayClickToastStart.toggle();
+        this._clearBookingCache();
+      }
+
+      _createEvent() {
+        let newEvent = {
+          "id": "",
+          "title" : this.$.eventNameInput.value,
+          "start" : this.fromTimeClick.date + "T" + this.fromTimeClick.time,
+          "end" : this.toTimeClick.date + "T" + this.toTimeClick.time
+          };
+        this.data = this._immutablePush(this.data, newEvent);
+        this._toggleEndToast();
+      }
+
+      _clearBookingCache(){
         this.toTimeClick = null;
         this.fromTimeClick = null;
-        this.$.dayClickToastStart.toggle();
+        this.$.eventNameInput.value = "";
       }
 
       _onDragStart(e){
