@@ -19,13 +19,13 @@
         font-size: 1.2em;
         line-height: 150%;
       }
-      #cancelCreateEventBtn{
+      #cancelCreateEventBtn, #cancelUpdateEventBtn {
         cursor: pointer;
         position: absolute;
         right: 10px;
         top: 10px;
       }
-      #eventNameInput {
+      #eventNameInput, #eventNameUpdateInput{
         width: 300px;
         margin: 15px 0;
       }
@@ -57,6 +57,16 @@
           <paper-button raised id="createEventBtn" on-tap="_createEvent">Create</paper-button>
           <iron-icon id="cancelCreateEventBtn" icon="icons:remove-circle" on-click="_toggleEndToast"></iron-icon>
       </paper-toast>
+    <paper-toast id="eventClickToast" class="booking-toast" duration="0" text="">
+      Date: [[_getDateFromEventTime(booking.start)]]<br/>
+      From: [[_getTimeFromEventTime(booking.start)]]<br/>
+      To: [[_getTimeFromEventTime(booking.end)]]<br/>
+
+      <paper-input label="Enter an event name..." id="eventNameUpdateInput" autofocus="true" value="[[booking.title]]"></paper-input>
+      <paper-button raised id="updateEventBtn" on-tap="_updateEvent">Update</paper-button>
+      <paper-button raised id="deleteEventBtn" on-tap="_deleteEvent">Delete</paper-button>
+      <iron-icon id="cancelUpdateEventBtn" icon="icons:remove-circle" on-click="_toggleEventToast"></iron-icon>
+    </paper-toast>
   </template>
 
   <script>
@@ -110,7 +120,7 @@
         Polymer.RenderStatus.afterNextRender(this, function() {
           this.data = [
             {"id": "1", "title" : "event1","start" : "2018-08-06","allDay" :false},
-            {"id": "2", "title" : "event2","start" : "2018-08-08T10:30:00","end" : "2018-08-08T08:30:00", "category":"Approved"},
+            {"id": "2", "title" : "event2","start" : "2018-08-08T08:30:00","end" : "2018-08-08T10:30:00", "category":"Approved"},
             {"id": "3", "title" : "event3","start" : "2018-08-10T12:30:00","end" : "2018-08-10T16:30:00", "category":"Pending"},
             {"id": "5", "title" : "event4","start" : "2018-08-11T12:30:00","allDay" :false},
             {"id": "6", "title" : "event5","start" : "2018-08-16T12:30:00","end" : "2018-08-16T16:30:00","category":"Approved"},
@@ -141,8 +151,17 @@
       }
       _onEventClick(e) {
         this.booking = this.data.find(b => {return b.id === e.detail.calEvent.id});
-        console.log(this.booking);
+        this.$.eventClickToast.open();
       }
+      _getDateFromEventTime(t){
+        if (t === undefined) return '';
+        return t.split("T")[0];
+      }
+      _getTimeFromEventTime(t){
+        if (t === undefined) return '';
+        return t.split("T")[1];
+      }
+
       _immutablePush(arr, newEntry){
         let v = {};
         newEntry = Object.assign(v, newEntry);
@@ -211,6 +230,10 @@
         this.$.dayClickToastStart.toggle();
         this._clearBookingCache();
       }
+      _toggleEventToast() {
+        this.$.eventClickToast.toggle();
+        this.booking = null;
+      }
 
       _createEvent() {
         let newEvent = {
@@ -222,6 +245,24 @@
           };
         this.data = this._immutablePush(this.data, newEvent);
         this._toggleEndToast();
+      }
+      _updateEvent() {
+        let selectingEvent = this.data.find(b => {return b.id === this.booking.id});
+        var index = this.data.indexOf(selectingEvent);
+        selectingEvent.title = this.$.eventNameUpdateInput.value;
+        this.data.splice(index, 1);
+        this.data = this._immutablePush(this.data, selectingEvent);
+
+        this._toggleEventToast();
+      }
+      _deleteEvent() {
+        let selectingEvent = this.data.find(b => {return b.id === this.booking.id});
+        var index = this.data.indexOf(selectingEvent);
+        this.data.splice(index, 1);
+
+        let newData = [].concat(this.data);
+        this.data = newData;
+        this._toggleEventToast();
       }
 
       _clearBookingCache(){
