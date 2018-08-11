@@ -5,7 +5,7 @@
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
-
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
 
 <dom-module id="p2-calender-app">
   <template>
@@ -63,6 +63,7 @@
       To: [[_getTimeFromEventTime(booking.end)]]<br/>
 
       <paper-input label="Enter an event name..." id="eventNameUpdateInput" autofocus="true" value="[[booking.title]]"></paper-input>
+      <paper-checkbox id="isApproveEvent">Approved</paper-checkbox><br/><br/>
       <paper-button raised id="updateEventBtn" on-tap="_updateEvent">Update</paper-button>
       <paper-button raised id="deleteEventBtn" on-tap="_deleteEvent">Delete</paper-button>
       <iron-icon id="cancelUpdateEventBtn" icon="icons:remove-circle" on-click="_toggleEventToast"></iron-icon>
@@ -110,7 +111,8 @@
         cal.addEventListener('event-drop', (e)=>this._onEventDrop(e));
         cal.addEventListener('event-click', (e)=>this._onEventClick(e));
         cal.addEventListener('day-click', (e)=>this._onDayClick(e));
-        /*cal.addEventListener('event-drag-start', (e)=>this._onDragStart(e));
+
+        /*cal.addEventListener('event-drag-start', (e)=>console.log(e));
         cal.addEventListener('event-drag-end', (e)=>this._onDragEnd(e));
         cal.addEventListener('event-mouse-over', (e)=>this._onMouseOver(e));*/
       }
@@ -119,12 +121,12 @@
         super.connectedCallback();
         Polymer.RenderStatus.afterNextRender(this, function() {
           this.data = [
-            {"id": "1", "title" : "event1","start" : "2018-08-06","allDay" :false},
+            {"id": "1", "title" : "event1","start" : "2018-08-06T09:30:00","end" : "2018-08-06T13:30:00", "category":"Approved"},
             {"id": "2", "title" : "event2","start" : "2018-08-08T08:30:00","end" : "2018-08-08T10:30:00", "category":"Approved"},
             {"id": "3", "title" : "event3","start" : "2018-08-10T12:30:00","end" : "2018-08-10T16:30:00", "category":"Pending"},
-            {"id": "5", "title" : "event4","start" : "2018-08-11T12:30:00","allDay" :false},
+            {"id": "5", "title" : "event4","start" : "2018-08-11T12:30:00","end" : "2018-08-11T13:30:00", "category":"Approved"},
             {"id": "6", "title" : "event5","start" : "2018-08-16T12:30:00","end" : "2018-08-16T16:30:00","category":"Approved"},
-            {"id": "8", "title" : "event6","start" : "2018-08-15T12:30:00","allDay" :false, "category":"Pending"}];
+            {"id": "8", "title" : "event6","start" : "2018-08-15T12:30:00","end" : "2018-08-15T15:30:00", "category":"Pending"}];
           this._refresh();
         });
       }
@@ -140,10 +142,27 @@
         cal.prev();
       }
       _onEventResize(e) {
-        console.log(e.detail.event.start, " - ", e.detail.event.end); //month counts from 0
+        let selectingEvent = this.data.find(b => {return b.id === e.detail.event.id});
+        var index = this.data.indexOf(selectingEvent);
+        let objTime = this._convertDayClickData(e.detail.event.end._i);
+        selectingEvent.end = objTime.date + "T" + objTime.time;
+
+        this.data.splice(index, 1);
+        this.data = this._immutablePush(this.data, selectingEvent);
       }
       _onEventDrop(e) {
-        console.log(e, this.data);
+        let selectingEvent = this.data.find(b => {return b.id === e.detail.event.id});
+        var index = this.data.indexOf(selectingEvent);
+        this.data.splice(index, 1);
+
+        let startObj = this._convertDayClickData(e.detail.event.start._i);
+        let endObj = this._convertDayClickData(e.detail.event.end._i);
+
+        selectingEvent.start = startObj.date + "T" + startObj.time;
+        selectingEvent.end = endObj.date + "T" + endObj.time;
+
+        this.data = this._immutablePush(this.data, selectingEvent);
+        console.log(this.data);
       }
       _addEvent() {
         let newEvent = {"id": "345", "title" : "eventNew","start" : "2018-08-09T11:30:00","end" : "2018-08-09T15:30:00"};
@@ -151,6 +170,7 @@
       }
       _onEventClick(e) {
         this.booking = this.data.find(b => {return b.id === e.detail.calEvent.id});
+        this.$.isApproveEvent.checked = this.booking.category === "Approved";
         this.$.eventClickToast.open();
       }
       _getDateFromEventTime(t){
@@ -237,7 +257,7 @@
 
       _createEvent() {
         let newEvent = {
-          "id": "",
+          "id": (new Date()).getTime(),
           "title" : this.$.eventNameInput.value,
           "start" : this.fromTimeClick.date + "T" + this.fromTimeClick.time,
           "end" : this.toTimeClick.date + "T" + this.toTimeClick.time,
@@ -250,6 +270,8 @@
         let selectingEvent = this.data.find(b => {return b.id === this.booking.id});
         var index = this.data.indexOf(selectingEvent);
         selectingEvent.title = this.$.eventNameUpdateInput.value;
+        selectingEvent.category = this.$.isApproveEvent.checked === true ? "Approved" : "Pending";
+
         this.data.splice(index, 1);
         this.data = this._immutablePush(this.data, selectingEvent);
 
@@ -271,15 +293,10 @@
         this.$.eventNameInput.value = "";
       }
 
-      _onDragStart(e){
-        console.log("Drag start:", e);
+      _checkApproveCategory(c) {
+        return c === "Approved" ? "checked" : "";
       }
-      _onDragEnd(e){
-        console.log("Drag end:", e);
-      }
-      _onMouseOver(e){
-        console.log("Mouse over:", e);
-      }
+
     }
 
     window.customElements.define(P2CalenderApp.is, P2CalenderApp);
