@@ -15,13 +15,13 @@ class MyCalculator extends LitElement {
 
     }
 
-    static get properties() { 
-        return { 
+    static get properties() {
+        return {
             total: Object
-        } 
+        }
     }
 
-    _render({ mood }) {
+    render() {
         return html`
             <style>
             .button {

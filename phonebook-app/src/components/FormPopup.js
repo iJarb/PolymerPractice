@@ -44,7 +44,7 @@ export default class FormPopup extends LitElement {
         this.formData = Object.assign(this.formData, formData);
     }
 
-    _render({}) {
+    render() {
         return html`
       <style>
         @import '/assets/css/global.css';

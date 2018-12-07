@@ -9,7 +9,7 @@ export default class FavoritesList extends LitElement {
 
     static get properties() {
         return {
-            allContacts: Array
+            allContacts: { type: Array }
         }
     }
 
@@ -41,7 +41,7 @@ export default class FavoritesList extends LitElement {
         });
     }
 
-    _render({}) {
+    render() {
         return html`
       <style>
         @import '/assets/css/global.css';

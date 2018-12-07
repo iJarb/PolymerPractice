@@ -8,7 +8,7 @@ export default class SideMenu extends LitElement {
         }
     }
 
-    _render({}) {
+    render() {
         return html`
       <style>
         @import '/assets/css/global.css';

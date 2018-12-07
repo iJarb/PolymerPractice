@@ -15,7 +15,7 @@ export default class ContentArea extends LitElement {
         }
     }
 
-    _render({}) {
+    render() {
         return html`
       <style>
         @import '/assets/css/global.css';
