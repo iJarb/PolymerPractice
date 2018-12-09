@@ -35,21 +35,21 @@ class PhonebookApp extends LitElement {
         this.saveContact = this.saveContact.bind(this);
         this.removeContact = this.removeContact.bind(this);
         window.addEventListener('toggleAddForm', () => this.togglePopup());
+        window.addEventListener('saveContact', (e) => this.saveContact(e));
     }
 
     togglePopup() {
         this.popupOpen = !this.popupOpen;
     }
 
-    saveContact(contact) {
+    saveContact(e) {
         function immutablePush(arr, newEntry) {
             let v = {};
             newEntry = Object.assign(v, newEntry);
             return [...arr, newEntry]
         }
-        this.allContacts = immutablePush(this.allContacts, contact);
+        this.allContacts = immutablePush(this.allContacts, e.detail);
         this.togglePopup();
-        //console.log(this.allContacts);
     }
 
     removeContact(index) {
@@ -75,7 +75,6 @@ class PhonebookApp extends LitElement {
       <div class="main-page">
         <side-menu></side-menu>
         <content-area .popupOpen="${this.popupOpen}"
-            .saveContact="${this.saveContact}"
             .allContacts="${this.allContacts}"
             .removeContact="${this.removeContact}">
         </content-area>

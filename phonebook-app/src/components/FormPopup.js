@@ -18,7 +18,7 @@ export default class FormPopup extends LitElement {
 
     submitForm(event) {
         event.preventDefault();
-        this.saveContact(this.formData);
+        window.dispatchEvent(new CustomEvent('saveContact', { detail: this.formData }));
         this.formData = {};
         this._clearForm();
     }
@@ -158,34 +158,34 @@ export default class FormPopup extends LitElement {
             <h2>Add a new contact</h2>
             <div class="form-group first-name">
                 <label for="first_name">First Name</label>
-                <input type="text" name="first_name" on-keyup="${this.change}">
+                <input type="text" name="first_name" @keyup="${this.change}">
             </div>
             <div class="form-group last-name">
                 <label for="last_name">Last Name</label>
-                <input type="text" name="last_name" on-keyup="${this.change}">
+                <input type="text" name="last_name" @keyup="${this.change}">
             </div>
             <div class="form-group address-1">
                 <label for="address_1">Address #1</label>
-                <input type="text" name="address_1" on-keyup="${this.change}">
+                <input type="text" name="address_1" @keyup="${this.change}">
             </div>
             <div class="form-group address-2">
                 <label for="address_2">Address #2</label>
-                <input type="text" name="address_2" on-keyup="${this.change}">
+                <input type="text" name="address_2" @keyup="${this.change}">
             </div>
             <div class="form-group city">
                 <label for="city">City</label>
-                <input type="text" name="city" on-keyup="${this.change}">
+                <input type="text" name="city" @keyup="${this.change}">
             </div>
             <div class="form-group state">
                 <label for="state">State</label>
-                <input type="text" name="state" on-keyup="${this.change}">
+                <input type="text" name="state" @keyup="${this.change}">
             </div>
             <div class="form-group zipcode">
                 <label for="zipcode">Zipcode</label>
-                <input type="text" name="zipcode" on-keyup="${this.change}">
+                <input type="text" name="zipcode" @keyup="${this.change}">
             </div>
             <div class="form-group question">
-                <input type="checkbox" id="is-favorite" name="favorite" on-change="${this.change}">
+                <input type="checkbox" id="is-favorite" name="favorite" @change="${this.change}">
                 <label for="is-favorite" style="top: 0">Is Favorite?</label>
             </div>
             <div class="form-group button">

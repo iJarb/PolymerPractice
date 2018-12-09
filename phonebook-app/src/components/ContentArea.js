@@ -8,7 +8,6 @@ export default class ContentArea extends LitElement {
     static get properties() {
         return {
             popupOpen: { type: Boolean},
-            togglePopup: Function,
             saveContact: Function,
             allContacts: { type: Array },
             removeContact: Function
@@ -28,7 +27,7 @@ export default class ContentArea extends LitElement {
         }
       </style>
     <section id="content-area">
-        <form-popup .popupOpen="${this.popupOpen}" .togglePopup="${this.togglePopup}" .saveContact="${this.saveContact}"></form-popup>
+        <form-popup .popupOpen="${this.popupOpen}"></form-popup>
         <favorites-list .allContacts="${this.allContacts}"></favorites-list>
         <contacts-list .allContacts="${this.allContacts}" .removeContact="${this.removeContact}"></contacts-list>
     </section>
