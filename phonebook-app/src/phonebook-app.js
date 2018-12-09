@@ -36,6 +36,7 @@ class PhonebookApp extends LitElement {
         this.removeContact = this.removeContact.bind(this);
         window.addEventListener('toggleAddForm', () => this.togglePopup());
         window.addEventListener('saveContact', (e) => this.saveContact(e));
+        window.addEventListener('removeContact', (e) => this.removeContact(e));
     }
 
     togglePopup() {
@@ -52,7 +53,8 @@ class PhonebookApp extends LitElement {
         this.togglePopup();
     }
 
-    removeContact(index) {
+    removeContact(e) {
+        const index = parseInt(e.detail);
         function immutableRemove(arr, index) {
             return arr.slice(0, index).concat(arr.slice(index + 1));
         }
