@@ -2,15 +2,9 @@ import {LitElement, html} from '@polymer/lit-element';
 
 export default class SideMenu extends LitElement {
 
-    static get properties() {
-        return {
-          togglePopup: Function
-        }
-    }
-
-    _addContact() {
-      this.popupOpen = !this.popupOpen;
-    }
+  _addContact() {
+    window.dispatchEvent(new CustomEvent('toggleAddForm'));
+  }
 
     render() {
         return html`
@@ -56,7 +50,7 @@ export default class SideMenu extends LitElement {
           <div class="menu">
             <div class="title">Contacts</div>
             <nav>
-              <a href="#" @click="${this.togglePopup}"><span class="icon"> + </span> Add contact</a>
+              <a href="#" @click="${this._addContact}"><span class="icon"> + </span> Add contact</a>
             </nav>
           </div>
         </section>
@@ -64,4 +58,4 @@ export default class SideMenu extends LitElement {
     }
 }
 
-window.customElements.define('side-menu', SideMenu);
+customElements.define('side-menu', SideMenu);

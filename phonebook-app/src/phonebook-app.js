@@ -1,6 +1,6 @@
 import { LitElement, html } from '@polymer/lit-element';
-import SideMenu from './components/SideMenu.js';
-import ContentArea from './components/ContentArea';
+import './components/SideMenu.js';
+import './components/ContentArea';
 
 /**
  * `phonebook-app`
@@ -34,6 +34,7 @@ class PhonebookApp extends LitElement {
         }];
         this.saveContact = this.saveContact.bind(this);
         this.removeContact = this.removeContact.bind(this);
+        window.addEventListener('toggleAddForm', () => this.togglePopup());
     }
 
     togglePopup() {
@@ -72,13 +73,15 @@ class PhonebookApp extends LitElement {
         }
       </style>
       <div class="main-page">
-        <side-menu .popupOpen="${this.popupOpen}" .togglePopup="${this.togglePopup}"></side-menu>
-        <content-area .popupOpen="${this.popupOpen}" .togglePopup="${this.togglePopup}"
-            .saveContact="${this.saveContact}" .allContacts="${this.allContacts}" .removeContact="${this.removeContact}"></content-area>
+        <side-menu></side-menu>
+        <content-area .popupOpen="${this.popupOpen}"
+            .saveContact="${this.saveContact}"
+            .allContacts="${this.allContacts}"
+            .removeContact="${this.removeContact}">
+        </content-area>
       </div>
     `;
     }
-
 }
 
-window.customElements.define('phonebook-app', PhonebookApp);
+customElements.define('phonebook-app', PhonebookApp);
