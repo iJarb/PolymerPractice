@@ -2,19 +2,19 @@ import {LitElement, html} from '@polymer/lit-element';
 
 export default class FormPopup extends LitElement {
 
+    static get properties() {
+        return {
+            popupOpen: { type: Boolean},
+            togglePopup: Function,
+            formData: { type: Object}
+        }
+    }
+
     constructor() {
         super();
         this.formData = {};
         this.change = this.change.bind(this);
         this.submitForm = this.submitForm.bind(this);
-    }
-
-    static get properties() {
-        return {
-            popupOpen: Boolean,
-            togglePopup: Function,
-            formData: Object,
-        }
     }
 
     submitForm(event) {
@@ -25,7 +25,7 @@ export default class FormPopup extends LitElement {
     }
 
     _clearForm() {
-        var inputs = this._root.querySelectorAll('input');
+        var inputs = this.querySelectorAll('input');
         inputs.forEach(i => {
            if(i.type == 'text') {
                i.value = '';
@@ -147,9 +147,9 @@ export default class FormPopup extends LitElement {
             fill: whitesmoke;
         }
       </style>
-    <section className="form-popup ${(this.popupOpen) ?  'active' : ''}">
-        <form on-submit="${this.submitForm}">
-            <div class="closing-btn" on-click="${this.togglePopup}">
+    <section class="form-popup ?active=${this.popupOpen}">
+        <form @submit="${this.submitForm}">
+            <div class="closing-btn" @click="${this.togglePopup}">
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"/></svg>
             </div>
             <h2>Add a new contact</h2>
@@ -188,8 +188,8 @@ export default class FormPopup extends LitElement {
             <div class="form-group button">
                 <button type="submit">Add</button>
             </div>
-            
-        </form>        
+
+        </form>
     </section>
     `;
     }

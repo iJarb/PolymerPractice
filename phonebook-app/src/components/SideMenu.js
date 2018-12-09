@@ -4,8 +4,12 @@ export default class SideMenu extends LitElement {
 
     static get properties() {
         return {
-            togglePopup: Function
+          togglePopup: Function
         }
+    }
+
+    _addContact() {
+      this.popupOpen = !this.popupOpen;
     }
 
     render() {
@@ -47,12 +51,12 @@ export default class SideMenu extends LitElement {
       
         <section id="side-menu">
           <div class="logo">
-            <img src="/assets/img/logo.png" width="80px" height="80px" />
+            <a href="/"><img src="/assets/img/logo.png" width="80px" height="80px" /></a>
           </div>
           <div class="menu">
             <div class="title">Contacts</div>
             <nav>
-              <a href="#" on-click="${this.togglePopup}"><span class="icon"> + </span> Add contact</a>
+              <a href="#" @click="${this.togglePopup}"><span class="icon"> + </span> Add contact</a>
             </nav>
           </div>
         </section>

@@ -2,16 +2,16 @@ import {LitElement, html} from '@polymer/lit-element';
 
 export default class ContactsList extends LitElement {
 
-    constructor() {
-        super();
-        this.displayAllContacts = this.displayAllContacts.bind(this);
-    }
-
     static get properties() {
         return {
             allContacts: { type: Array },
             removeContact: Function
         }
+    }
+
+    constructor() {
+        super();
+        this.displayAllContacts = this.displayAllContacts.bind(this);
     }
 
     displayAllContacts() {

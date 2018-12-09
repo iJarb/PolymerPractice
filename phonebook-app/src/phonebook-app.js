@@ -11,9 +11,16 @@ import ContentArea from './components/ContentArea';
  * @demo demo/index.html
  */
 class PhonebookApp extends LitElement {
+
+    static get properties() {
+        return {
+            popupOpen: { type: Boolean},
+            allContacts: { type: Array}
+        };
+    }
+
     constructor() {
         super();
-        this.togglePopup = this.togglePopup.bind(this);
         this.popupOpen = false;
         this.allContacts = [{
             address_1: "6D, 6, Yo-kyla",
@@ -29,17 +36,8 @@ class PhonebookApp extends LitElement {
         this.removeContact = this.removeContact.bind(this);
     }
 
-    static get properties() {
-        return {
-            popupOpen: Boolean,
-            allContacts: Array
-        };
-    }
-
     togglePopup() {
         this.popupOpen = !this.popupOpen;
-        //console.log(this.popupOpen);
-        //this.requestRender(); //popupOpen is a property so don't need to call requestRender()
     }
 
     saveContact(contact) {
@@ -50,7 +48,7 @@ class PhonebookApp extends LitElement {
         }
         this.allContacts = immutablePush(this.allContacts, contact);
         this.togglePopup();
-        console.log(this.allContacts);
+        //console.log(this.allContacts);
     }
 
     removeContact(index) {
@@ -74,9 +72,9 @@ class PhonebookApp extends LitElement {
         }
       </style>
       <div class="main-page">
-        <side-menu togglePopup="${this.togglePopup}"></side-menu>
-        <content-area popupOpen="${this.popupOpen}" togglePopup="${this.togglePopup}"
-            saveContact="${this.saveContact}" allContacts="${this.allContacts}" removeContact="${this.removeContact}"></content-area>
+        <side-menu .popupOpen="${this.popupOpen}" .togglePopup="${this.togglePopup}"></side-menu>
+        <content-area .popupOpen="${this.popupOpen}" .togglePopup="${this.togglePopup}"
+            .saveContact="${this.saveContact}" .allContacts="${this.allContacts}" .removeContact="${this.removeContact}"></content-area>
       </div>
     `;
     }

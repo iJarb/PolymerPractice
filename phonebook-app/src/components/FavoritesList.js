@@ -2,15 +2,15 @@ import {LitElement, html} from '@polymer/lit-element';
 
 export default class FavoritesList extends LitElement {
 
-    constructor() {
-        super();
-        this.displayFavoriteContacts = this.displayFavoriteContacts.bind(this);
-    }
-
     static get properties() {
         return {
             allContacts: { type: Array }
         }
+    }
+
+    constructor() {
+        super();
+        this.displayFavoriteContacts = this.displayFavoriteContacts.bind(this);
     }
 
     displayFavoriteContacts() {
