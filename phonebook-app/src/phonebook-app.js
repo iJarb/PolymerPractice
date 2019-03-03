@@ -1,4 +1,4 @@
-import { LitElement, html } from '@polymer/lit-element';
+import { LitElement, html } from 'lit-element';
 import './components/SideMenu.js';
 import './components/ContentArea';
 
@@ -23,8 +23,8 @@ class PhonebookApp extends LitElement {
         super();
         this.popupOpen = false;
         this.allContacts = [{
-            address_1: "6D, 6, Yo-kyla",
-            address_2: "second address",
+            address_1: "Student village",
+            address_2: "Joukahaisenkatu 3 20520",
             city: "Turku",
             favorite: true,
             first_name: "Tan",
