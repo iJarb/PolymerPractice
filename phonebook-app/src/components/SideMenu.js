@@ -1,13 +1,13 @@
-import {LitElement, html} from 'lit-element';
+import { LitElement, html } from 'lit-element';
 
 export default class SideMenu extends LitElement {
 
   _addContact() {
-    window.dispatchEvent(new CustomEvent('toggleAddForm'));
+    window.dispatchEvent(new CustomEvent('toggle-add-form'));
   }
 
-    render() {
-        return html`
+  render() {
+    return html`
       <style>
         @import '/assets/css/global.css';
         :host {
@@ -55,7 +55,7 @@ export default class SideMenu extends LitElement {
           </div>
         </section>
     `;
-    }
+  }
 }
 
 customElements.define('side-menu', SideMenu);

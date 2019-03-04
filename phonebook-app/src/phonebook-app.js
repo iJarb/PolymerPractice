@@ -32,15 +32,19 @@ class PhonebookApp extends LitElement {
             state: "TUK",
             zipcode: "20540"
         }];
-        this.saveContact = this.saveContact.bind(this);
-        this.removeContact = this.removeContact.bind(this);
-        window.addEventListener('toggleAddForm', () => this.togglePopup());
-        window.addEventListener('saveContact', (e) => this.saveContact(e));
-        window.addEventListener('removeContact', (e) => this.removeContact(e));
+        window.addEventListener('toggle-add-form', () => this.togglePopup());
+        window.addEventListener('save-contact', (e) => this.saveContact(e));
+        window.addEventListener('remove-contact', (e) => this.removeContact(e));
+        window.addEventListener('edit-contact', (e) => this.editContact(e));
     }
 
     togglePopup() {
         this.popupOpen = !this.popupOpen;
+    }
+
+    editContact(e) {
+      // todo: show the form with selected contact detail
+      console.log(e.detail);
     }
 
     saveContact(e) {
