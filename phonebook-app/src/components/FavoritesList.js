@@ -1,48 +1,48 @@
-import {LitElement, html} from 'lit-element';
+import { LitElement, html } from 'lit-element';
 
 export default class FavoritesList extends LitElement {
 
-    static get properties() {
-        return {
-            allContacts: { type: Array }
-        }
+  static get properties() {
+    return {
+      allContacts: { type: Array }
     }
+  }
 
-    constructor() {
-        super();
-        this.displayFavoriteContacts = this.displayFavoriteContacts.bind(this);
-    }
+  constructor() {
+    super();
+    this.displayFavoriteContacts = this.displayFavoriteContacts.bind(this);
+  }
 
-    displayFavoriteContacts() {
-        return this.allContacts.map((contact) => {
-            if (contact.favorite) {
-                return html`
-                <div class="card">
-                    <div class="user-img"></div>
-                    <div class="fullname">
-                        <span class="text">${contact.first_name} ${contact.last_name}</span>
-                        <span class="sub">Full name</span>
-                    </div>
-                    <div class="number">
-                        <span class="text">${contact.address_1}</span>
-                        <span class="sub">Address</span>
-                    </div>
-                    <div class="state">
-                        <span class="text">${contact.state}</span>
-                        <span class="sub">State</span>   
-                    </div>
-                    <div class="category">
-                        <span class="text">${contact.zipcode}</span>
-                        <span class="sub">Zipcode</span>     
-                    </div>
-                </div> 
-                `;
-            }
-        });
-    }
-
-    render() {
+  displayFavoriteContacts() {
+    return this.allContacts.map((contact) => {
+      if (contact.favorite) {
         return html`
+                <div class="card">
+                  <div class="user-img"></div>
+                  <div class="fullname">
+                    <span class="text">${contact.first_name} ${contact.last_name}</span>
+                    <span class="sub">Full name</span>
+                  </div>
+                  <div class="number">
+                    <span class="text">${contact.address_1}</span>
+                    <span class="sub">Address</span>
+                  </div>
+                  <div class="state">
+                    <span class="text">${contact.state}</span>
+                    <span class="sub">State</span>
+                  </div>
+                  <div class="category">
+                    <span class="text">${contact.zipcode}</span>
+                    <span class="sub">Zipcode</span>
+                  </div>
+                </div>
+                `;
+      }
+    });
+  }
+
+  render() {
+    return html`
       <style>
         @import '/assets/css/global.css';
         :host {
@@ -123,7 +123,7 @@ export default class FavoritesList extends LitElement {
             ${this.displayFavoriteContacts()}
         </section>
     `;
-    }
+  }
 }
 
 window.customElements.define('favorites-list', FavoritesList);
