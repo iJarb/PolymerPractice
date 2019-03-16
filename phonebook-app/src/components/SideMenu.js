@@ -16,7 +16,7 @@ export default class SideMenu extends LitElement {
 
         #side-menu {
             background: #323759;
-            height: 100vh;
+            height: 100%;
             padding: 50px 20px;
         }
 
