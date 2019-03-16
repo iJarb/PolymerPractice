@@ -12,6 +12,7 @@
   justify-content: center;
   align-items: center;
   visibility: hidden;
+  z-index: 100;
 }
 .form-popup.active {
   visibility: visible;
