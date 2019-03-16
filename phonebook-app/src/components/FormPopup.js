@@ -12,7 +12,7 @@ export default class FormPopup extends LitElement {
   constructor() {
     super();
     this.formData = {};
-    this.change = this.change.bind(this);
+    this.change = this._change.bind(this);
     this.submitForm = this.submitForm.bind(this);
   }
 
@@ -24,7 +24,7 @@ export default class FormPopup extends LitElement {
   }
 
   _clearForm() {
-    var inputs = this.querySelectorAll('input');
+    var inputs = this.shadowRoot.querySelectorAll('input');
     inputs.forEach(i => {
       if (i.type == 'text') {
         i.value = '';
@@ -34,7 +34,7 @@ export default class FormPopup extends LitElement {
     });
   }
 
-  change(event) {
+  _change(event) {
     let formData = {};
     let name = event.target.name;
     let value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value;
@@ -61,34 +61,34 @@ export default class FormPopup extends LitElement {
             <h2>Add a new contact</h2>
             <div class="form-group first-name">
                 <label for="first_name">First Name</label>
-                <input type="text" name="first_name" @keyup="${this.change}">
+                <input type="text" name="first_name" @keyup="${this._change}">
             </div>
             <div class="form-group last-name">
                 <label for="last_name">Last Name</label>
-                <input type="text" name="last_name" @keyup="${this.change}">
+                <input type="text" name="last_name" @keyup="${this._change}">
             </div>
             <div class="form-group address-1">
                 <label for="address_1">Address #1</label>
-                <input type="text" name="address_1" @keyup="${this.change}">
+                <input type="text" name="address_1" @keyup="${this._change}">
             </div>
             <div class="form-group address-2">
                 <label for="address_2">Address #2</label>
-                <input type="text" name="address_2" @keyup="${this.change}">
+                <input type="text" name="address_2" @keyup="${this._change}">
             </div>
             <div class="form-group city">
                 <label for="city">City</label>
-                <input type="text" name="city" @keyup="${this.change}">
+                <input type="text" name="city" @keyup="${this._change}">
             </div>
             <div class="form-group state">
                 <label for="state">State</label>
-                <input type="text" name="state" @keyup="${this.change}">
+                <input type="text" name="state" @keyup="${this._change}">
             </div>
             <div class="form-group zipcode">
                 <label for="zipcode">Zipcode</label>
-                <input type="text" name="zipcode" @keyup="${this.change}">
+                <input type="text" name="zipcode" @keyup="${this._change}">
             </div>
             <div class="form-group question">
-                <input type="checkbox" id="is-favorite" name="favorite" @change="${this.change}">
+                <input type="checkbox" id="is-favorite" name="favorite" @change="${this._change}">
                 <label for="is-favorite" style="top: 0">Is Favorite?</label>
             </div>
             <div class="form-group button">
