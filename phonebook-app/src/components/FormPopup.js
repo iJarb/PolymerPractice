@@ -35,8 +35,10 @@ export default class FormPopup extends LitElement {
 
     if (this.mode == 'edit') {
       this._editingId = e.detail.id;
-      console.log(e.detail);
-      // todo: show data to form inputs
+
+      Object.keys(e.detail.data).forEach((k) => {
+        this._assignValueToInput(k, e.detail.data[k]);
+      });
     }
   }
 
@@ -45,7 +47,7 @@ export default class FormPopup extends LitElement {
     this.formData = {};
 
     // clear form data
-    var inputs = this.shadowRoot.querySelectorAll('input');
+    const inputs = this.shadowRoot.querySelectorAll('input');
     inputs.forEach(i => {
       if (i.type == 'text') {
         i.value = '';
@@ -62,6 +64,11 @@ export default class FormPopup extends LitElement {
 
     formData[name] = value;
     this.formData = Object.assign(this.formData, formData);
+  }
+
+  _assignValueToInput(inputName, value) {
+    const input = this.shadowRoot.querySelector('input[name=\'' + inputName + '\']');
+    input.value = value;
   }
 
   render() {
