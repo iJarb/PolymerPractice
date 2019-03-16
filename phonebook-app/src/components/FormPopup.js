@@ -68,7 +68,11 @@ export default class FormPopup extends LitElement {
 
   _assignValueToInput(inputName, value) {
     const input = this.shadowRoot.querySelector('input[name=\'' + inputName + '\']');
-    input.value = value;
+    if (input.type == 'text') {
+      input.value = value;
+    } else if (input.type == 'checkbox') {
+      input.checked = value;
+    }
   }
 
   render() {

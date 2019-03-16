@@ -42,7 +42,12 @@ class PhonebookApp extends LitElement {
 
   _saveContact(e) {
     if (e.detail.id) {
-      console.log(e.detail);
+      let contact = this.allContacts[e.detail.id];
+      const data = e.detail.data;
+      Object.keys(data).forEach((key) => {
+        contact[key] = data[key]
+      });
+      this._refreshContacts();
       return;
     }
 
@@ -61,6 +66,10 @@ class PhonebookApp extends LitElement {
     }
     this.allContacts = immutableRemove(this.allContacts, index);
     console.log("Removed: " + index);
+  }
+
+  _refreshContacts() {
+    this.allContacts = this.allContacts.concat([]);
   }
 
   render() {
