@@ -18,7 +18,11 @@ export default class ContactsList extends LitElement {
   }
 
   _editContact(e) {
-    window.dispatchEvent(new CustomEvent('edit-contact', { detail: e.currentTarget.id }));
+    window.dispatchEvent(new CustomEvent('show-form', { detail: {
+      mode: 'edit',
+      id: e.currentTarget.id,
+      data: this.allContacts[e.currentTarget.id]
+    } }));
   }
 
   displayAllContacts() {

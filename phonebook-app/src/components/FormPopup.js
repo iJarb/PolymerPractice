@@ -5,31 +5,46 @@ export default class FormPopup extends LitElement {
   static get properties() {
     return {
       popupOpen: { type: Boolean },
-      formData: { type: Object }
+      formData: { type: Object },
+      mode: { type: String }
     }
   }
 
   constructor() {
     super();
     this.formData = {};
+    this.mode = 'add';
     this.change = this._change.bind(this);
     this.submitForm = this.submitForm.bind(this);
-    window.addEventListener('open-edit-contact', (e) => this._showEdit(e));
+    window.addEventListener('show-form', (e) => this._showForm(e));
   }
 
   submitForm(event) {
     event.preventDefault();
-    window.dispatchEvent(new CustomEvent('save-contact', { detail: this.formData }));
-    this.formData = {};
-    this._clearForm();
+    if (this.mode == 'edit') {
+      window.dispatchEvent(new CustomEvent('save-contact', { detail: { id: this._editingId, data: this.formData } }));
+    } else {
+      window.dispatchEvent(new CustomEvent('save-contact', { detail: this.formData }));
+    }
+    this._closeForm();
   }
 
-  _showEdit(e) {
+  _showForm(e) {
     this.popupOpen = true;
-    console.log(e.detail);
+    this.mode = e.detail.mode;
+
+    if (this.mode == 'edit') {
+      this._editingId = e.detail.id;
+      console.log(e.detail);
+      // todo: show data to form inputs
+    }
   }
 
-  _clearForm() {
+  _closeForm() {
+    this.popupOpen = false;
+    this.formData = {};
+
+    // clear form data
     var inputs = this.shadowRoot.querySelectorAll('input');
     inputs.forEach(i => {
       if (i.type == 'text') {
@@ -49,10 +64,6 @@ export default class FormPopup extends LitElement {
     this.formData = Object.assign(this.formData, formData);
   }
 
-  _toogleAddForm() {
-    window.dispatchEvent(new CustomEvent('toggle-add-form'));
-  }
-
   render() {
     return html`
       <style>
@@ -61,10 +72,10 @@ export default class FormPopup extends LitElement {
       </style>
     <section class="form-popup ${this.popupOpen ? 'active' : ''}">
         <form @submit="${this.submitForm}" autocomplete="off">
-            <div class="closing-btn" @click="${this._toogleAddForm}">
+            <div class="closing-btn" @click="${this._closeForm}">
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"/></svg>
             </div>
-            <h2>Add a new contact</h2>
+            <h2>${this.mode == 'add' ? 'Add contact' : 'Update contact'}</h2>
             <div class="form-group first-name">
                 <label for="first_name">First Name</label>
                 <input type="text" name="first_name" @keyup="${this._change}">
@@ -98,7 +109,7 @@ export default class FormPopup extends LitElement {
                 <label for="is-favorite" style="top: 0">Is Favorite?</label>
             </div>
             <div class="form-group button">
-                <button type="submit">Add</button>
+                <button type="submit">${this.mode == 'add' ? html`Add` : 'Update'}</button>
             </div>
 
         </form>

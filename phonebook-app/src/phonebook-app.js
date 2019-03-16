@@ -15,14 +15,12 @@ class PhonebookApp extends LitElement {
 
   static get properties() {
     return {
-      popupOpen: { type: Boolean },
       allContacts: { type: Array }
     };
   }
 
   constructor() {
     super();
-    this.popupOpen = false;
     this.allContacts = [{
       address_1: "Student village",
       address_2: "Joukahaisenkatu 3 20520",
@@ -33,14 +31,9 @@ class PhonebookApp extends LitElement {
       state: "TUK",
       zipcode: "20540"
     }];
-    window.addEventListener('toggle-add-form', () => this._togglePopup());
     window.addEventListener('save-contact', (e) => this._saveContact(e));
     window.addEventListener('remove-contact', (e) => this._removeContact(e));
     window.addEventListener('edit-contact', (e) => this._editContact(e));
-  }
-
-  _togglePopup() {
-    this.popupOpen = !this.popupOpen;
   }
 
   _editContact(e) {
@@ -48,13 +41,17 @@ class PhonebookApp extends LitElement {
   }
 
   _saveContact(e) {
+    if (e.detail.id) {
+      console.log(e.detail);
+      return;
+    }
+
     function immutablePush(arr, newEntry) {
       let v = {};
       newEntry = Object.assign(v, newEntry);
       return [...arr, newEntry]
     }
     this.allContacts = immutablePush(this.allContacts, e.detail);
-    this._togglePopup();
   }
 
   _removeContact(e) {
@@ -81,7 +78,7 @@ class PhonebookApp extends LitElement {
       <div class="main-page">
         <side-menu></side-menu>
         <content-area .allContacts="${this.allContacts}" .removeContact="${this._removeContact}"></content-area>
-        <form-popup .popupOpen="${this.popupOpen}"></form-popup>
+        <form-popup></form-popup>
       </div>
     `;
   }
