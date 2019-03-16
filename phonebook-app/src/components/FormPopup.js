@@ -14,6 +14,7 @@ export default class FormPopup extends LitElement {
     this.formData = {};
     this.change = this._change.bind(this);
     this.submitForm = this.submitForm.bind(this);
+    window.addEventListener('open-edit-contact', (e) => this._showEdit(e));
   }
 
   submitForm(event) {
@@ -21,6 +22,11 @@ export default class FormPopup extends LitElement {
     window.dispatchEvent(new CustomEvent('save-contact', { detail: this.formData }));
     this.formData = {};
     this._clearForm();
+  }
+
+  _showEdit(e) {
+    this.popupOpen = true;
+    console.log(e.detail);
   }
 
   _clearForm() {
