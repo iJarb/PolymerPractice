@@ -25,7 +25,7 @@ class PhonebookApp extends LitElement {
       address_1: "Student village",
       address_2: "Joukahaisenkatu 3 20520",
       city: "Turku",
-      favorite: true,
+      bookmark: true,
       first_name: "Tan",
       last_name: "Bui",
       state: "TUK",

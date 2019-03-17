@@ -116,8 +116,8 @@ export default class FormPopup extends LitElement {
                 <input type="text" name="zipcode" @keyup="${this._change}">
             </div>
             <div class="form-group question">
-                <input type="checkbox" id="is-favorite" name="favorite" @change="${this._change}">
-                <label for="is-favorite" style="top: 0">Is Favorite?</label>
+                <input type="checkbox" id="is-bookmark" name="bookmark" @change="${this._change}">
+                <label for="is-bookmark" style="top: 0">Add to bookmark</label>
             </div>
             <div class="form-group button">
                 <button type="submit">${this.mode == 'add' ? html`Add` : 'Update'}</button>

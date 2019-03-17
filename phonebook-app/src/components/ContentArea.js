@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit-element';
 import ContactsList from './ContactsList.js';
-import FavoritesList from './FavoritesList.js';
+import BookmarkList from './BookmarkList.js';
 
 export default class ContentArea extends LitElement {
 
@@ -23,7 +23,7 @@ export default class ContentArea extends LitElement {
         }
       </style>
     <section id="content-area">
-        <favorites-list .allContacts="${this.allContacts}"></favorites-list>
+        <bookmark-list .allContacts="${this.allContacts}"></bookmark-list>
         <contacts-list .allContacts="${this.allContacts}"></contacts-list>
     </section>
     `;

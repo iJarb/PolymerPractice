@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit-element';
 
-export default class FavoritesList extends LitElement {
+export default class BookmarkList extends LitElement {
 
   static get properties() {
     return {
@@ -10,12 +10,12 @@ export default class FavoritesList extends LitElement {
 
   constructor() {
     super();
-    this.displayFavoriteContacts = this.displayFavoriteContacts.bind(this);
+    this.displayBookmarkContacts = this.displayBookmarkContacts.bind(this);
   }
 
-  displayFavoriteContacts() {
+  displayBookmarkContacts() {
     return this.allContacts.map((contact) => {
-      if (contact.favorite) {
+      if (contact.bookmark) {
         return html`
                 <div class="card">
                   <div class="user-img"></div>
@@ -53,7 +53,7 @@ export default class FavoritesList extends LitElement {
             font-weight: 300;
             grid-column: 1/4;
         }
-        .favorites {
+        .bookmark {
             max-width: 800px;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -118,12 +118,12 @@ export default class FavoritesList extends LitElement {
         }
         
       </style>
-        <section class="favorites">
-            <h2>Favorites</h2>
-            ${this.displayFavoriteContacts()}
+        <section class="bookmark">
+            <h2>Bookmark</h2>
+            ${this.displayBookmarkContacts()}
         </section>
     `;
   }
 }
 
-window.customElements.define('favorites-list', FavoritesList);
+window.customElements.define('bookmark-list', BookmarkList);
