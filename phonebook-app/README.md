@@ -23,5 +23,12 @@ $ npm run test
 Note: This configuration will test the app with Chrome only, to test on other browsers,
 please run `polymer test --npm`.
 
+## Deployment
+```
+npm run build
+```
+This command will bundle the app in to `es5`, `es6`, `esm` bundles in `/build` directory.
+Each of those bundle can then be deploy into any front-end web server.
+
 ## References
 * Child element [data binding](https://lit-element.polymer-project.org/docs/templates/databinding)

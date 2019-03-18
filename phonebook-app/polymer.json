@@ -1,7 +1,13 @@
 {
   "entrypoint": "index.html",
   "shell": "src/phonebook-app.js",
-
+  "sources": [
+    "assets/**/*"
+  ],
+  "extraDependencies": [
+    "manifest.json",
+    "node_modules/@webcomponents/webcomponentsjs/**"
+  ],
   "builds": [
     {
       "name": "esm-bundled",

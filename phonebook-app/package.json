@@ -7,7 +7,8 @@
   },
   "scripts": {
     "start": "polymer serve --open",
-    "test": "polymer test -l chrome"
+    "test": "polymer test -l chrome",
+    "build": "polymer build"
   },
   "devDependencies": {
     "@polymer/test-fixture": "^4.0.2",
