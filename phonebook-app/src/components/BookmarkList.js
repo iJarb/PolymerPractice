@@ -13,11 +13,21 @@ export default class BookmarkList extends LitElement {
     this.displayBookmarkContacts = this.displayBookmarkContacts.bind(this);
   }
 
+  _editContact(e) {
+    window.dispatchEvent(new CustomEvent('show-form', {
+      detail: {
+        mode: 'edit',
+        id: e.currentTarget.id,
+        data: this.allContacts[e.currentTarget.id]
+      }
+    }));
+  }
+
   displayBookmarkContacts() {
-    return this.allContacts.map((contact) => {
+    return this.allContacts.map((contact, index) => {
       if (contact.bookmark) {
         return html`
-                <div class="card">
+                <div class="card" .id="${index}" @click="${this._editContact}">
                   <div class="user-img"></div>
                   <div class="fullname">
                     <span class="text">${contact.first_name} ${contact.last_name}</span>
