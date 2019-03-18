@@ -12,8 +12,21 @@
   <!-- See https://goo.gl/OOhYW5 -->
   <link rel="manifest" href="manifest.json">
 
-  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-  <script type="module" src="src/phonebook-app.js"></script>
+  <script>
+    // Load and register pre-caching Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('service-worker.js', {
+          scope: '/',
+        });
+      });
+    }
+
+    // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
+    // https://github.com/reactjs/redux/issues/2907
+    window.process = { env: { NODE_ENV: 'production' } };
+  </script>
+
   <style>
       * {
         -webkit-box-sizing: border-box;
@@ -25,6 +38,9 @@
 
 <body>
   <phonebook-app></phonebook-app>
+    
+  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script type="module" src="src/phonebook-app.js"></script>
 </body>
 
 </html>
