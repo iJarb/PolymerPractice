@@ -98,7 +98,7 @@ export default class ContactsList extends LitElement {
         box-shadow: 0px 4px 77px -17px rgba(0, 0, 0, 0.36);
       }
       .contact .user-img {
-        background-image: url("https://s3.amazonaws.com/uifaces/faces/twitter/idiot/128.jpg");
+        background-image: url("/assets/img/user-image.jpg");
         height: 40px;
         width: 40px;
         background-size: cover;

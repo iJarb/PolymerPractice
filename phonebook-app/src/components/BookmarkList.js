@@ -83,7 +83,7 @@ export default class BookmarkList extends LitElement {
             box-shadow: 0px 4px 77px -17px  rgba(0,0,0, 0.36);
         }
         .user-img {
-            background-image: url("https://s3.amazonaws.com/uifaces/faces/twitter/idiot/128.jpg");
+            background-image: url("/assets/img/user-image.jpg");
             height: 80px;
             width: 80px;
             background-size: cover;
@@ -106,9 +106,9 @@ export default class BookmarkList extends LitElement {
             border-bottom: 1px solid rgba(0,0,0,.1);
         }
         .category {
-            border-left: 1px solid rgba(0,0,0,.1);        
+            border-left: 1px solid rgba(0,0,0,.1);
         }
-        
+
         .text {
             display: block;
             text-align: center;
