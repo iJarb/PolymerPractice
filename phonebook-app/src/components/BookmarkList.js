@@ -35,7 +35,8 @@ export default class BookmarkList extends LitElement {
     return this.allContacts.map((contact, index) => {
       if (contact.bookmark) {
         return html`
-          <paper-card heading="${contact.first_name + " " + contact.last_name}" image="/assets/img/user-image.jpg">
+          <paper-card heading="${contact.first_name + " " + contact.last_name}"
+            image="/assets/img/${contact.image ? contact.image : 'user-image.jpg'}">
             <div class="card-content">
               <vaadin-button theme="tertiary">
                 <iron-icon icon="vaadin:phone-landline" slot="prefix"></iron-icon>
@@ -66,6 +67,7 @@ export default class BookmarkList extends LitElement {
         @import '/assets/css/global.css';
         :host {
           display: block;
+          --paper-card-header-color: #1676F3;
         }
         h2 {
             color: #3e4162;
@@ -73,15 +75,25 @@ export default class BookmarkList extends LitElement {
             grid-column: 1/4;
         }
         .bookmark {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            grid-gap: 20px;
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+          grid-gap: 20px;
+        }
+        paper-card {
+          max-width: 300px;
         }
         .card-content {
           text-align: center;
         }
         .card-actions {
-          text-align: right;
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            grid-gap: 5px;
+        }
+        @media only screen and (max-width: 900px) {
+          .bookmark {
+            grid-template-columns: 1fr 1fr;
+          }
         }
       </style>
       <h2>Bookmark</h2>

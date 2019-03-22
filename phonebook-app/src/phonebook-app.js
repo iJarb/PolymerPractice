@@ -22,17 +22,68 @@ class PhonebookApp extends LitElement {
 
   constructor() {
     super();
-    this.allContacts = [{
-      first_name: "Tan",
-      last_name: "Bui",
-      phone_number: "+358 44 678 1234",
-      email: "trungtanbui@gmail.com",
-      address: "Joukahaisenkatu 3 20520",
-      city: "Turku",
-      state: "TUK",
-      zipcode: "20540",
-      bookmark: true
-    }];
+    this.allContacts = [
+      {
+        first_name: "Tan",
+        last_name: "Bui",
+        phone_number: "+358 44 678 1234",
+        email: "trungtanbui@gmail.com",
+        address: "Joukahaisenkatu 3 20520",
+        city: "Turku",
+        state: "TUK",
+        zipcode: "20540",
+        image: 'tan-bui.jpg',
+        bookmark: true
+      },
+      {
+        first_name: "Tan",
+        last_name: "Bui",
+        phone_number: "+358 44 678 1234",
+        email: "trungtanbui@gmail.com",
+        address: "Joukahaisenkatu 3 20520",
+        city: "Turku",
+        state: "TUK",
+        zipcode: "20540",
+        image: 'tan-bui.jpg',
+        bookmark: true
+      },
+      {
+        first_name: "Tan",
+        last_name: "Bui",
+        phone_number: "+358 44 678 1234",
+        email: "trungtanbui@gmail.com",
+        address: "Joukahaisenkatu 3 20520",
+        city: "Turku",
+        state: "TUK",
+        zipcode: "20540",
+        image: 'tan-bui.jpg',
+        bookmark: true
+      },
+      {
+        first_name: "Tan",
+        last_name: "Bui",
+        phone_number: "+358 44 678 1234",
+        email: "trungtanbui@gmail.com",
+        address: "Joukahaisenkatu 3 20520",
+        city: "Turku",
+        state: "TUK",
+        zipcode: "20540",
+        image: 'tan-bui.jpg',
+        bookmark: true
+      },
+      {
+        first_name: "Tan",
+        last_name: "Bui",
+        phone_number: "+358 44 678 1234",
+        email: "trungtanbui@gmail.com",
+        address: "Joukahaisenkatu 3 20520",
+        city: "Turku",
+        state: "TUK",
+        zipcode: "20540",
+        image: 'tan-bui.jpg',
+        bookmark: true
+      }
+    ];
     window.addEventListener('save-contact', (e) => this._saveContact(e));
     window.addEventListener('remove-contact', (e) => this._removeContact(e));
     window.addEventListener('edit-contact', (e) => this._editContact(e));
