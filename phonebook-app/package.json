@@ -3,6 +3,9 @@
   "description": "A very simple app with lit-element.",
   "main": "phonebook-app.js",
   "dependencies": {
+    "@polymer/paper-card": "^3.0.1",
+    "@vaadin/vaadin-button": "^2.1.4",
+    "@vaadin/vaadin-icons": "^4.3.1",
     "@vaadin/vaadin-split-layout": "^4.1.0",
     "lit-element": "^2.0.1"
   },
