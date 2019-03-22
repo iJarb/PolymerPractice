@@ -3,6 +3,7 @@
   "description": "A very simple app with lit-element.",
   "main": "phonebook-app.js",
   "dependencies": {
+    "@vaadin/vaadin-split-layout": "^4.1.0",
     "lit-element": "^2.0.1"
   },
   "scripts": {

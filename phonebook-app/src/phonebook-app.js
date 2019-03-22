@@ -1,4 +1,5 @@
 import { LitElement, html } from 'lit-element';
+import '@vaadin/vaadin-split-layout';
 import './components/SideMenu.js';
 import './components/ContentArea';
 import './components/FormPopup';
@@ -80,16 +81,15 @@ class PhonebookApp extends LitElement {
           display: block;
         }
 
-        .main-page {
-            display: grid;
-            grid-template-columns: 250px 1fr;
+        vaadin-split-layout {
+          min-height: 100vh;
         }
       </style>
-      <div class="main-page">
-        <side-menu></side-menu>
-        <content-area .allContacts="${this.allContacts}" .removeContact="${this._removeContact}"></content-area>
-        <form-popup></form-popup>
-      </div>
+      <vaadin-split-layout>
+        <side-menu style="width: 25%;"></side-menu>
+        <content-area style="width: 75%;" .allContacts="${this.allContacts}" .removeContact="${this._removeContact}"></content-area>
+      </vaadin-split-layout>
+      <form-popup></form-popup>
     `;
   }
 }

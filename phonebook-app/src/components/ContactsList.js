@@ -45,6 +45,10 @@ export default class ContactsList extends LitElement {
                 <span class="text">${contact.phone_number_1}</span>
                 <span class="sub">Phone</span>
               </div>
+              <div class="address">
+                <span class="text">${contact.address}</span>
+                <span class="sub">Address</span>
+              </div>
               <div class="state">
                 <span class="text">${contact.city}</span>
                 <span class="sub">City</span>
@@ -78,16 +82,15 @@ export default class ContactsList extends LitElement {
       h2 {
         color: #3e4162;
         font-weight: 300;
-      }
-      .contacts {
-        max-width: 800px;
+        margin: 0;
+        margin-top: 40px;
       }
       .contact {
         width: 100%;
         display: grid;
         grid-template-columns: 1fr 2fr 3fr 1fr 1fr 1fr;
         color: #3d4060;
-        padding: 20px;
+        padding: 10px;
         border-radius: 10px;
         transition: all 0.1s ease-in-out;
         cursor: pointer;
@@ -126,6 +129,7 @@ export default class ContactsList extends LitElement {
       }
       .fullname,
       .user-img,
+      .address,
       .zipcode,
       .state,
       .number {
