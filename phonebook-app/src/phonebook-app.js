@@ -1,8 +1,9 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import '@vaadin/vaadin-split-layout';
 import './components/SideMenu.js';
 import './components/ContentArea';
 import './components/FormPopup';
+import { SharedStyles } from './shared-styles.js';
 
 /**
  * `phonebook-app`
@@ -127,7 +128,18 @@ class PhonebookApp extends LitElement {
 
   render() {
     return html`
-      <style>
+      <vaadin-split-layout>
+        <side-menu style="width: 25%;"></side-menu>
+        <content-area style="width: 75%;" .allContacts="${this.allContacts}" .removeContact="${this._removeContact}"></content-area>
+      </vaadin-split-layout>
+      <form-popup></form-popup>
+    `;
+  }
+
+  static get styles() {
+    return [
+      SharedStyles,
+      css`
         :host {
           display: block;
         }
@@ -135,13 +147,8 @@ class PhonebookApp extends LitElement {
         vaadin-split-layout {
           min-height: 100vh;
         }
-      </style>
-      <vaadin-split-layout>
-        <side-menu style="width: 25%;"></side-menu>
-        <content-area style="width: 75%;" .allContacts="${this.allContacts}" .removeContact="${this._removeContact}"></content-area>
-      </vaadin-split-layout>
-      <form-popup></form-popup>
-    `;
+      `
+    ];
   }
 }
 

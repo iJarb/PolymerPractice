@@ -1,6 +1,7 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import ContactsList from './ContactsList.js';
 import BookmarkList from './BookmarkList.js';
+import { SharedStyles } from '../shared-styles';
 
 export default class ContentArea extends LitElement {
 
@@ -12,8 +13,17 @@ export default class ContentArea extends LitElement {
 
   render() {
     return html`
-      <style>
-        @import '/assets/css/global.css';
+    <section id="content-area">
+        <bookmark-list .allContacts="${this.allContacts}"></bookmark-list>
+        <contacts-list .allContacts="${this.allContacts}"></contacts-list>
+    </section>
+    `;
+  }
+
+  static get styles() {
+    return [
+      SharedStyles,
+      css`
         :host {
           display: block;
         }
@@ -21,12 +31,8 @@ export default class ContentArea extends LitElement {
             background: #fcfdff;
             padding: 50px 80px;
         }
-      </style>
-    <section id="content-area">
-        <bookmark-list .allContacts="${this.allContacts}"></bookmark-list>
-        <contacts-list .allContacts="${this.allContacts}"></contacts-list>
-    </section>
-    `;
+      `
+    ];
   }
 }
 

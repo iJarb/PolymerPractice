@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit-element';
+import { SharedStyles } from '../shared-styles';
 
 export default class SideMenu extends LitElement {
 
@@ -23,40 +24,42 @@ export default class SideMenu extends LitElement {
   }
 
   static get styles() {
-    return css`
-      @import '/assets/css/global.css';
-      :host {
-        display: block;
-      }
-
-      #side-menu {
-          background: #323759;
-          height: 100%;
-          padding: 50px 20px;
-      }
-
-      .logo{
-        text-align: center;
-      }
-
-      .title {
-          font-weight: 700;
-          color: #ccced7;
-          margin: 1rem 0;
-      }
-
-      #side-menu nav a {
-          color: #ccced7;
-          text-decoration: none;
-          text-transform: capitalize;
+    return [
+      SharedStyles,
+      css`
+        :host {
           display: block;
-          padding: 10px 10px 10px 0;
-      }
+        }
 
-      #side-menu nav a span.icon {
-          padding: 10px 10px 10px 0;
-      }
-    `;
+        #side-menu {
+            background: #323759;
+            height: 100%;
+            padding: 50px 20px;
+        }
+
+        .logo{
+          text-align: center;
+        }
+
+        .title {
+            font-weight: 700;
+            color: #ccced7;
+            margin: 1rem 0;
+        }
+
+        #side-menu nav a {
+            color: #ccced7;
+            text-decoration: none;
+            text-transform: capitalize;
+            display: block;
+            padding: 10px 10px 10px 0;
+        }
+
+        #side-menu nav a span.icon {
+            padding: 10px 10px 10px 0;
+        }
+      `
+    ];
   }
 }
 

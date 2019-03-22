@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit-element';
+import { SharedStyles } from '../shared-styles';
 
 export default class ContactsList extends LitElement {
 
@@ -71,84 +72,87 @@ export default class ContactsList extends LitElement {
   }
 
   static get styles() {
-    return css`
-      :host {
-        display: block;
-      }
-      h2 {
-        color: #3e4162;
-        font-weight: 300;
-        margin: 0;
-        margin-top: 40px;
-      }
-      .contact {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 2fr 2fr 2fr 4fr;
-        color: #3d4060;
-        padding: 10px;
-        border-radius: 10px;
-        transition: all 0.1s ease-in-out;
-        cursor: pointer;
-      }
-      .contact:hover {
-        -webkit-box-shadow: 0px 4px 77px -17px rgba(0, 0, 0, 0.36);
-        -moz-box-shadow: 0px 4px 77px -17px rgba(0, 0, 0, 0.36);
-        box-shadow: 0px 4px 77px -17px rgba(0, 0, 0, 0.36);
-      }
-      .contact .user-img {
-        background-image: url("/assets/img/user-image.jpg");
-        height: 40px;
-        width: 40px;
-        background-size: cover;
-        background-position: center center;
-        border-radius: 10px;
-      }
-      .contact .fullname {
-        color: #3d4060;
-        font-weight: 700;
-        text-transform: capitalize;
-        font-size: 1.3em;
-      }
+    return [
+      SharedStyles,
+      css`
+        :host {
+          display: block;
+        }
+        h2 {
+          color: #3e4162;
+          font-weight: 300;
+          margin: 0;
+          margin-top: 40px;
+        }
+        .contact {
+          width: 100%;
+          display: grid;
+          grid-template-columns: 1fr 2fr 2fr 2fr 4fr;
+          color: #3d4060;
+          padding: 10px;
+          border-radius: 10px;
+          transition: all 0.1s ease-in-out;
+          cursor: pointer;
+        }
+        .contact:hover {
+          -webkit-box-shadow: 0px 4px 77px -17px rgba(0, 0, 0, 0.36);
+          -moz-box-shadow: 0px 4px 77px -17px rgba(0, 0, 0, 0.36);
+          box-shadow: 0px 4px 77px -17px rgba(0, 0, 0, 0.36);
+        }
+        .contact .user-img {
+          background-image: url("/assets/img/user-image.jpg");
+          height: 40px;
+          width: 40px;
+          background-size: cover;
+          background-position: center center;
+          border-radius: 10px;
+        }
+        .contact .fullname {
+          color: #3d4060;
+          font-weight: 700;
+          text-transform: capitalize;
+          font-size: 1.3em;
+        }
 
-      .text {
-        display: block;
-        text-align: center;
-      }
-      .sub {
-        display: block;
-        color: #b4b5c5;
-        font-weight: 300;
-        font-size: 0.8rem;
-        text-align: center;
-        margin: 5px 0;
-      }
-      .fullname, .address, .zipcode, .number, .email {
-        font-size: 1.3em;
-        font-weight: 400;
-      }
-      .delete-btn {
-        cursor: pointer;
-        text-align: right;
-        z-index: 10;
-        display: block;
-        transition: all 0.3s ease-in-out;
+        .text {
+          display: block;
+          text-align: center;
+        }
+        .sub {
+          display: block;
+          color: #b4b5c5;
+          font-weight: 300;
+          font-size: 0.8rem;
+          text-align: center;
+          margin: 5px 0;
+        }
+        .fullname, .address, .zipcode, .number, .email {
+          font-size: 1.3em;
+          font-weight: 400;
+        }
+        .delete-btn {
+          cursor: pointer;
+          text-align: right;
+          z-index: 10;
+          display: block;
+          transition: all 0.3s ease-in-out;
 
-        position: relative;
-        top: 30px;
-        right: 10px;
-      }
-      .delete-btn svg {
-        width: 15px;
-        height: 15px;
-        transition: all 0.3s ease-in-out;
-      }
-      .delete-btn svg:hover {
-        width: 18px;
-        height: 18px;
-        color: red;
-      }
-    `;
+          position: relative;
+          top: 30px;
+          right: 10px;
+        }
+        .delete-btn svg {
+          width: 15px;
+          height: 15px;
+          transition: all 0.3s ease-in-out;
+        }
+        .delete-btn svg:hover {
+          width: 18px;
+          height: 18px;
+          color: red;
+        }
+      `
+    ];
   }
 }
 

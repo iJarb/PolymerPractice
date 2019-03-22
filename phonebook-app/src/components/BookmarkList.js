@@ -1,7 +1,8 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import '@polymer/paper-card';
 import '@vaadin/vaadin-icons';
 import '@vaadin/vaadin-button';
+import { SharedStyles } from '../shared-styles';
 
 export default class BookmarkList extends LitElement {
 
@@ -35,8 +36,7 @@ export default class BookmarkList extends LitElement {
     return this.allContacts.map((contact, index) => {
       if (contact.bookmark) {
         return html`
-          <paper-card heading="${contact.first_name + " " + contact.last_name}"
-            image="/assets/img/${contact.image ? contact.image : 'user-image.jpg'}">
+          <paper-card heading="${contact.first_name + " " + contact.last_name}" image="/assets/img/${contact.image ? contact.image : 'user-image.jpg'}">
             <div class="card-content">
               <vaadin-button theme="tertiary">
                 <iron-icon icon="vaadin:phone-landline" slot="prefix"></iron-icon>
@@ -63,8 +63,17 @@ export default class BookmarkList extends LitElement {
 
   render() {
     return html`
-      <style>
-        @import '/assets/css/global.css';
+      <h2>Bookmark</h2>
+      <section class="bookmark">
+        ${this.displayBookmarkContacts()}
+      </section>
+    `;
+  }
+
+  static get styles() {
+    return [
+      SharedStyles,
+      css`
         :host {
           display: block;
           --paper-card-header-color: #1676F3;
@@ -95,12 +104,8 @@ export default class BookmarkList extends LitElement {
             grid-template-columns: 1fr 1fr;
           }
         }
-      </style>
-      <h2>Bookmark</h2>
-      <section class="bookmark">
-          ${this.displayBookmarkContacts()}
-      </section>
-    `;
+      `
+    ];
   }
 }
 
