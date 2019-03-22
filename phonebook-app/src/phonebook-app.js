@@ -22,14 +22,15 @@ class PhonebookApp extends LitElement {
   constructor() {
     super();
     this.allContacts = [{
-      address_1: "Student village",
-      address_2: "Joukahaisenkatu 3 20520",
-      city: "Turku",
-      bookmark: true,
       first_name: "Tan",
       last_name: "Bui",
+      phone_number_1: "+358 44 678 1234",
+      phone_number_2: "+358 44 678 4321",
+      address: "Joukahaisenkatu 3 20520",
+      city: "Turku",
       state: "TUK",
-      zipcode: "20540"
+      zipcode: "20540",
+      bookmark: true
     }];
     window.addEventListener('save-contact', (e) => this._saveContact(e));
     window.addEventListener('remove-contact', (e) => this._removeContact(e));

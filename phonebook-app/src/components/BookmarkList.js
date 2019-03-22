@@ -105,7 +105,7 @@ export default class BookmarkList extends LitElement {
             grid-column: 1/3;
             border-bottom: 1px solid rgba(0,0,0,.1);
         }
-        .category {
+        .zipcode {
             border-left: 1px solid rgba(0,0,0,.1);
         }
 

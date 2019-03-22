@@ -42,14 +42,14 @@ export default class ContactsList extends LitElement {
                 <span class="sub">Full name</span>
               </div>
               <div class="number">
-                <span class="text">${contact.address_1}</span>
-                <span class="sub">Address</span>
+                <span class="text">${contact.phone_number_1}</span>
+                <span class="sub">Phone</span>
               </div>
               <div class="state">
-                <span class="text">${contact.state}</span>
-                <span class="sub">State</span>
+                <span class="text">${contact.city}</span>
+                <span class="sub">City</span>
               </div>
-              <div class="category">
+              <div class="zipcode">
                 <span class="text">${contact.zipcode}</span>
                 <span class="sub">Zipcode</span>
               </div>
@@ -126,7 +126,7 @@ export default class ContactsList extends LitElement {
       }
       .fullname,
       .user-img,
-      .category,
+      .zipcode,
       .state,
       .number {
         font-size: 1.3em;
