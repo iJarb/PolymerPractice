@@ -25,8 +25,8 @@ class PhonebookApp extends LitElement {
     this.allContacts = [{
       first_name: "Tan",
       last_name: "Bui",
-      phone_number_1: "+358 44 678 1234",
-      phone_number_2: "+358 44 678 4321",
+      phone_number: "+358 44 678 1234",
+      email: "trungtanbui@gmail.com",
       address: "Joukahaisenkatu 3 20520",
       city: "Turku",
       state: "TUK",

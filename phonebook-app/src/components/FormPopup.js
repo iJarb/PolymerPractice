@@ -95,13 +95,13 @@ export default class FormPopup extends LitElement {
                 <label for="last_name">Last Name</label>
                 <input type="text" name="last_name" id="last_name" @keyup="${this._change}">
             </div>
-            <div class="form-group phone_number_1">
-                <label for="phone_number">Phone number #1</label>
-                <input type="text" name="phone_number_1" id="phone_number_1" @keyup="${this._change}">
+            <div class="form-group phone_number">
+                <label for="phone_number">Phone number</label>
+                <input type="text" name="phone_number" id="phone_number" @keyup="${this._change}">
             </div>
-            <div class="form-group phone_number_2">
-                <label for="phone_number">Phone number #2</label>
-                <input type="text" name="phone_number_2" id="phone_number_2" @keyup="${this._change}">
+            <div class="form-group email">
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" @keyup="${this._change}">
             </div>
             <div class="form-group address">
                 <label for="address_2">Address</label>

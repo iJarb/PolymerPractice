@@ -34,16 +34,12 @@ export default class BookmarkList extends LitElement {
                     <span class="sub">Full name</span>
                   </div>
                   <div class="number">
-                    <span class="text">${contact.phone_number_1}</span>
-                    <span class="sub">Phone 1 (icon)</span>
+                    <span class="text">${contact.phone_number}</span>
+                    <span class="sub">Phone</span>
                   </div>
                   <div class="number">
-                    <span class="text">${contact.phone_number_2}</span>
-                    <span class="sub">Phone 1 (icon)</span>
-                  </div>
-                  <div class="number">
-                    <span class="text">${contact.zipcode}</span>
-                    <span class="sub">Zipcode</span>
+                    <span class="text">${contact.email}</span>
+                    <span class="sub">Email</span>
                   </div>
                 </div>
                 `;
@@ -121,7 +117,7 @@ export default class BookmarkList extends LitElement {
             text-align: center;
             margin: 5px 0;
         }
-        .fullname, .user-img, .zipcode, .state, .number {
+        .fullname, .user-img {
             font-size: 1.3em;
             font-weight: 400;
             padding: 15px;
