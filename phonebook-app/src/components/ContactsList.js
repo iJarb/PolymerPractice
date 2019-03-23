@@ -61,13 +61,10 @@ export default class ContactsList extends LitElement {
 
   render() {
     return html`
-      <style>
-        @import '/assets/css/global.css';
-      </style>
-        <section class="contacts">
-            <h2>Contacts</h2>
-            ${this.displayAllContacts()}
-        </section>
+      <section class="contacts">
+          <h2>Contacts</h2>
+          ${this.displayAllContacts()}
+      </section>
     `;
   }
 

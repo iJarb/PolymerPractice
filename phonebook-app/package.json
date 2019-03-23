@@ -4,6 +4,7 @@
   "main": "phonebook-app.js",
   "dependencies": {
     "@polymer/paper-card": "^3.0.1",
+    "@polymer/paper-dialog": "^3.0.1",
     "@vaadin/vaadin-button": "^2.1.4",
     "@vaadin/vaadin-icons": "^4.3.1",
     "@vaadin/vaadin-split-layout": "^4.1.0",
