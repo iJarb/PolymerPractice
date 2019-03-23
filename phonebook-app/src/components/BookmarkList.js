@@ -98,6 +98,7 @@ export default class BookmarkList extends LitElement {
           text-align: left;
           font-size: .9em;
           padding: 0.625em;
+          text-align: center;
           color: var(--main-color);
         }
         .card-content div {
@@ -108,11 +109,6 @@ export default class BookmarkList extends LitElement {
           display: grid;
           grid-template-columns: 3fr 2fr;
           grid-gap: 5px;
-        }
-        @media only screen and (max-width: 900px) {
-          .bookmark {
-            grid-template-columns: 1fr 1fr;
-          }
         }
       `
     ];

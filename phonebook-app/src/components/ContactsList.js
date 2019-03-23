@@ -37,7 +37,7 @@ export default class ContactsList extends LitElement {
                 <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm101.8-262.2L295.6 256l62.2 62.2c4.7 4.7 4.7 12.3 0 17l-22.6 22.6c-4.7 4.7-12.3 4.7-17 0L256 295.6l-62.2 62.2c-4.7 4.7-12.3 4.7-17 0l-22.6-22.6c-4.7-4.7-4.7-12.3 0-17l62.2-62.2-62.2-62.2c-4.7-4.7-4.7-12.3 0-17l22.6-22.6c4.7-4.7 12.3-4.7 17 0l62.2 62.2 62.2-62.2c4.7-4.7 12.3-4.7 17 0l22.6 22.6c4.7 4.7 4.7 12.3 0 17z" /></svg>
             </div>
             <div class="contact" .id="${index}" @click="${this._editContact}">
-              <div class="user-img"></div>
+              <div class="user-img" style="background-image: url('/assets/img/${contact.image ? contact.image : 'user-image.jpg'}')"></div>
               <div class="fullname">
                 <span class="text">${contact.first_name} ${contact.last_name}</span>
                 <span class="sub">Full name</span>
@@ -84,7 +84,7 @@ export default class ContactsList extends LitElement {
         .contact {
           width: 100%;
           display: grid;
-          grid-template-columns: 1fr 2fr 2fr 2fr 4fr;
+          grid-template-columns: 1fr 1fr 3fr 3fr 4fr;
           color: #3d4060;
           padding: 10px;
           border-radius: 10px;
@@ -97,7 +97,6 @@ export default class ContactsList extends LitElement {
           box-shadow: 0px 4px 77px -17px rgba(0, 0, 0, 0.36);
         }
         .contact .user-img {
-          background-image: url("/assets/img/user-image.jpg");
           height: 40px;
           width: 40px;
           background-size: cover;
@@ -108,7 +107,6 @@ export default class ContactsList extends LitElement {
           color: #3d4060;
           font-weight: 700;
           text-transform: capitalize;
-          font-size: 1.3em;
         }
 
         .text {
@@ -124,7 +122,7 @@ export default class ContactsList extends LitElement {
           margin: 5px 0;
         }
         .fullname, .address, .zipcode, .number, .email {
-          font-size: 1.3em;
+          font-size: 1.2em;
           font-weight: 400;
         }
         .delete-btn {
