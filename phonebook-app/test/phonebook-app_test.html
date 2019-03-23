@@ -35,11 +35,11 @@
       });
 
       it('should load the main page', () => {
-        expect(el.shadowRoot.querySelector('.main-page')).not.to.be.null;
+        expect(el.shadowRoot.querySelector('vaadin-split-layout')).not.to.be.null;
       });
 
       it('should have an example contact', () => {
-        expect(el.allContacts.length).to.be.equal(1);
+        expect(el.allContacts.length).to.be.equal(3);
       });
 
     });
