@@ -90,13 +90,9 @@ export default class BookmarkList extends LitElement {
         h3 {
           margin: 5px 0;
         }
-        .bookmark {
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr 1fr;
-          grid-gap: 20px;
-        }
         paper-card {
           max-width: 250px;
+          margin: 0 20px 20px 0;
         }
         .card-content {
           text-align: left;
