@@ -59,30 +59,6 @@ class PhonebookApp extends LitElement {
         zipcode: "20540",
         image: 'tan-bui.jpg',
         bookmark: true
-      },
-      {
-        first_name: "Tan",
-        last_name: "Bui",
-        phone_number: "+358 44 678 1234",
-        email: "trungtanbui@gmail.com",
-        address: "Joukahaisenkatu 3 20520",
-        city: "Turku",
-        state: "TUK",
-        zipcode: "20540",
-        image: 'tan-bui.jpg',
-        bookmark: true
-      },
-      {
-        first_name: "Tan",
-        last_name: "Bui",
-        phone_number: "+358 44 678 1234",
-        email: "trungtanbui@gmail.com",
-        address: "Joukahaisenkatu 3 20520",
-        city: "Turku",
-        state: "TUK",
-        zipcode: "20540",
-        image: 'tan-bui.jpg',
-        bookmark: true
       }
     ];
     window.addEventListener('save-contact', (e) => this._saveContact(e));
