@@ -1,5 +1,5 @@
-import { LitElement, html, css } from 'lit-element';
-import { SharedStyles } from '../shared-styles';
+import { LitElement, html, css, unsafeCSS } from 'lit-element';
+import { SharedStyles, SmallScreen, XSmallScreen } from '../shared-styles';
 
 export default class ContactsList extends LitElement {
 
@@ -146,7 +146,23 @@ export default class ContactsList extends LitElement {
           height: 1.8rem;
           color: red;
         }
-      `
+      `,
+      unsafeCSS(SmallScreen(`
+        .contact .user-img, .sub, .address {
+          display: none;
+        }
+        .contact {
+          grid-template-columns: 2fr 3fr 3fr;
+        }
+      `)),
+      unsafeCSS(XSmallScreen(`
+        .email {
+          display: none;
+        }
+        .contact {
+          grid-template-columns: 1fr 2fr;
+        }
+      `))
     ];
   }
 }

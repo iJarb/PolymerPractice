@@ -22,3 +22,11 @@ export const SmallScreen = (content) => {
     }
   `;
 }
+
+export const XSmallScreen = (content) => {
+  return `
+    @media only screen and (max-width: 40rem) {
+      ${content}
+    }
+  `;
+}
