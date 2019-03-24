@@ -79,8 +79,8 @@ export default class BookmarkList extends LitElement {
           display: block;
           --main-color: #1676F3;
           --paper-card-header-color: var(--main-color);
-          --iron-icon-width: 0.85em;
-          --iron-icon-height: 0.85em;
+          --iron-icon-width: 1.3rem;
+          --iron-icon-height: 1.3rem;
         }
         h2 {
           color: #3e4162;
@@ -91,13 +91,13 @@ export default class BookmarkList extends LitElement {
           margin: 5px 0;
         }
         paper-card {
-          max-width: 250px;
-          margin: 0 20px 20px 0;
+          width: 25rem;
+          margin: 0 2rem 2rem 0;
         }
         .card-content {
           text-align: left;
-          font-size: .9em;
-          padding: 0.625em;
+          font-size: 1.5rem;
+          padding: 1rem;
           text-align: center;
           color: var(--main-color);
         }
@@ -108,7 +108,7 @@ export default class BookmarkList extends LitElement {
         .card-actions {
           display: grid;
           grid-template-columns: 3fr 2fr;
-          grid-gap: 5px;
+          grid-gap: .5rem;
         }
       `
     ];

@@ -34,7 +34,8 @@ export default class SideMenu extends LitElement {
         #side-menu {
             background: #323759;
             height: 100%;
-            padding: 50px 20px;
+            padding: 5rem 2rem;
+            font-size: 1.4rem;
         }
 
         .logo{
@@ -44,7 +45,7 @@ export default class SideMenu extends LitElement {
         .title {
             font-weight: 700;
             color: #ccced7;
-            margin: 1rem 0;
+            margin: 1.6rem 0;
         }
 
         #side-menu nav a {
@@ -52,11 +53,11 @@ export default class SideMenu extends LitElement {
             text-decoration: none;
             text-transform: capitalize;
             display: block;
-            padding: 10px 10px 10px 0;
+            padding: 1rem 1rem 1rem 0;
         }
 
         #side-menu nav a span.icon {
-            padding: 10px 10px 10px 0;
+          padding: 1rem 1rem 1rem 0;
         }
       `
     ];

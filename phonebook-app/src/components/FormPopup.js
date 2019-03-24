@@ -129,26 +129,26 @@ export default class FormPopup extends LitElement {
       css`
         form {
           background: white;
-          padding: 0 20px;
+          padding: 0 2rem;
           display: grid;
           grid-template-columns: 1fr 1fr 1fr 1fr;
-          width: 400px;
-          grid-gap: 20px;
+          width: 40rem;
+          grid-gap: 2rem;
         }
         h2 {
-          font-size: 1.4rem;
+          font-size: 2.2rem;
           font-weight: 500;
           grid-column: 1/5;
         }
         label {
           background: white;
-          font-size: 0.8rem;
+          font-size: 1.6rem;
           position: relative;
-          top: 10px;
+          top: 1rem;
           display: inline-block;
         }
         input[type="text"] {
-          padding: 10px 0;
+          padding: .8rem .6rem;
           display: block;
           width: 100%;
         }

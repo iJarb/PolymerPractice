@@ -29,7 +29,7 @@ export default class ContentArea extends LitElement {
         }
         #content-area {
             background: #fcfdff;
-            padding: 50px 80px;
+            padding: 5rem 8rem;
         }
       `
     ];

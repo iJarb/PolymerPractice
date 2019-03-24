@@ -79,29 +79,29 @@ export default class ContactsList extends LitElement {
           color: #3e4162;
           font-weight: 300;
           margin: 0;
-          margin-top: 40px;
+          margin-top: 4rem;
         }
         .contact {
           width: 100%;
           display: grid;
           grid-template-columns: 1fr 1fr 3fr 3fr 4fr;
           color: #3d4060;
-          padding: 10px;
-          border-radius: 10px;
+          padding: 1rem;
+          border-radius: 1rem;
           transition: all 0.1s ease-in-out;
           cursor: pointer;
         }
         .contact:hover {
-          -webkit-box-shadow: 0px 4px 77px -17px rgba(0, 0, 0, 0.36);
-          -moz-box-shadow: 0px 4px 77px -17px rgba(0, 0, 0, 0.36);
-          box-shadow: 0px 4px 77px -17px rgba(0, 0, 0, 0.36);
+          -webkit-box-shadow: 0px 4px 7.7rem -1.7rem rgba(0, 0, 0, 0.36);
+          -moz-box-shadow: 0px 4px 7.7rem -1.7rem rgba(0, 0, 0, 0.36);
+          box-shadow: 0px 4px 7.7rem -1.7rem rgba(0, 0, 0, 0.36);
         }
         .contact .user-img {
-          height: 40px;
-          width: 40px;
+          height: 4rem;
+          width: 4rem;
           background-size: cover;
           background-position: center center;
-          border-radius: 10px;
+          border-radius: 1rem;
         }
         .contact .fullname {
           color: #3d4060;
@@ -117,12 +117,12 @@ export default class ContactsList extends LitElement {
           display: block;
           color: #b4b5c5;
           font-weight: 300;
-          font-size: 0.8rem;
+          font-size: 1.1rem;
           text-align: center;
-          margin: 5px 0;
+          margin: .5rem 0;
         }
         .fullname, .address, .zipcode, .number, .email {
-          font-size: 1.2em;
+          font-size: 1.7rem;
           font-weight: 400;
         }
         .delete-btn {
@@ -133,17 +133,17 @@ export default class ContactsList extends LitElement {
           transition: all 0.3s ease-in-out;
 
           position: relative;
-          top: 30px;
-          right: 10px;
+          top: 3rem;
+          right: 1rem;
         }
         .delete-btn svg {
-          width: 15px;
-          height: 15px;
+          width: 1.5rem;
+          height: 1.5rem;
           transition: all 0.3s ease-in-out;
         }
         .delete-btn svg:hover {
-          width: 18px;
-          height: 18px;
+          width: 1.8rem;
+          height: 1.8rem;
           color: red;
         }
       `

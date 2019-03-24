@@ -8,4 +8,9 @@ export const SharedStyles = css`
 
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
   }
+
+  vaadin-button {
+    font-size: 1.5rem;
+    --lumo-button-size: 3.5rem;
+  }
 `;
