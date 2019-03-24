@@ -160,7 +160,7 @@ export default class ContactsList extends LitElement {
           display: none;
         }
         .contact {
-          grid-template-columns: 1fr 2fr;
+          grid-template-columns: 2fr 5fr;
         }
       `))
     ];

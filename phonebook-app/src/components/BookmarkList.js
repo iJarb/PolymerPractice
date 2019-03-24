@@ -77,7 +77,6 @@ export default class BookmarkList extends LitElement {
       css`
         :host {
           display: block;
-          --main-color: #1676F3;
           --paper-card-header-color: var(--main-color);
           --iron-icon-width: 1.3rem;
           --iron-icon-height: 1.3rem;

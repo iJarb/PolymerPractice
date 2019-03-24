@@ -1,5 +1,5 @@
-import { LitElement, html, css } from 'lit-element';
-import { SharedStyles } from '../shared-styles';
+import { LitElement, html, css, unsafeCSS } from 'lit-element';
+import { SharedStyles, XSmallScreen } from '../shared-styles';
 import '@polymer/paper-dialog';
 import '@vaadin/vaadin-button';
 
@@ -142,7 +142,7 @@ export default class FormPopup extends LitElement {
         }
         label {
           background: white;
-          font-size: 1.6rem;
+          font-size: 1.2rem;
           position: relative;
           top: 1rem;
           display: inline-block;
@@ -151,6 +151,7 @@ export default class FormPopup extends LitElement {
           padding: .8rem .6rem;
           display: block;
           width: 100%;
+          font-size: 1.2rem;
         }
         .first-name {
           grid-column: 1/3; /*from col 1 to col 3*/
@@ -174,7 +175,28 @@ export default class FormPopup extends LitElement {
           justify-self: start;
           grid-column: 1/3;
         }
-      `
+      `,
+      unsafeCSS(XSmallScreen(`
+        form {
+          padding: 0 1rem;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          width: 100%;
+          grid-gap: .5rem;
+        }
+        .first-name, .last-name, .phone_number, .email, .address, .city {
+          grid-column: 1/3;
+        }
+        .state {
+          grid-column: 1/2;
+        }
+        .zipcode {
+          grid-column: 2/2;
+        }
+        .bookmark {
+          grid-column: 1/3;
+        }
+      `))
     ];
   }
 }

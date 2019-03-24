@@ -102,8 +102,13 @@ class PhonebookApp extends LitElement {
     this.allContacts = this.allContacts.concat([]);
   }
 
+  _addContact() {
+    this.shadowRoot.querySelector('side-menu')._addContact();
+  }
+
   render() {
     return html`
+      <div id="add-contact-menu" icon="vaadin:plus-circle" @click="${this._addContact}"></div>
       <vaadin-split-layout>
         <side-menu style="width: 25%;"></side-menu>
         <content-area style="width: 75%;" .allContacts="${this.allContacts}" .removeContact="${this._removeContact}"></content-area>
@@ -118,15 +123,35 @@ class PhonebookApp extends LitElement {
       css`
         :host {
           display: block;
+          --main-color: #1676F3;
         }
 
         vaadin-split-layout {
           min-height: 100vh;
         }
+
+        #add-contact-menu {
+          background: url('/assets/img/manifest/icon-192x192.png') no-repeat center center;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+          width: 4rem;
+          height: 4rem;
+          display: none;
+          position: absolute;
+          right: 1rem;
+          top: 1rem;
+          z-index: 100;
+          cursor: pointer;
+        }
       `,
       unsafeCSS(SmallScreen(`
         vaadin-split-layout side-menu {
           display:none;
+        }
+        #add-contact-menu {
+          display: block;
         }
       `))
     ];
