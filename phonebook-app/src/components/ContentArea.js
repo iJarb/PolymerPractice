@@ -1,7 +1,7 @@
-import { LitElement, html, css } from 'lit-element';
+import { LitElement, html, css, unsafeCSS } from 'lit-element';
 import ContactsList from './ContactsList.js';
 import BookmarkList from './BookmarkList.js';
-import { SharedStyles } from '../shared-styles';
+import { SharedStyles, SmallScreen } from '../shared-styles';
 
 export default class ContentArea extends LitElement {
 
@@ -31,7 +31,12 @@ export default class ContentArea extends LitElement {
             background: #fcfdff;
             padding: 5rem 8rem;
         }
-      `
+      `,
+      unsafeCSS(SmallScreen(`
+        #content-area {
+          padding: 0 3rem;
+        }
+      `))
     ];
   }
 }

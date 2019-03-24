@@ -1,8 +1,8 @@
-import { LitElement, html, css } from 'lit-element';
+import { LitElement, html, css, unsafeCSS } from 'lit-element';
 import '@polymer/paper-card';
 import '@vaadin/vaadin-icons';
 import '@vaadin/vaadin-button';
-import { SharedStyles } from '../shared-styles';
+import { SharedStyles, SmallScreen } from '../shared-styles';
 
 export default class BookmarkList extends LitElement {
 
@@ -110,7 +110,12 @@ export default class BookmarkList extends LitElement {
           grid-template-columns: 3fr 2fr;
           grid-gap: .5rem;
         }
-      `
+      `,
+      unsafeCSS(SmallScreen(`
+        .bookmark {
+          text-align: center;
+        }
+      `))
     ];
   }
 }

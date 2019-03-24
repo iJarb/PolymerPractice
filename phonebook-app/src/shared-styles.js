@@ -14,3 +14,11 @@ export const SharedStyles = css`
     --lumo-button-size: 3.5rem;
   }
 `;
+
+export const SmallScreen = (content) => {
+  return `
+    @media only screen and (max-width: 60rem) {
+      ${content}
+    }
+  `;
+}

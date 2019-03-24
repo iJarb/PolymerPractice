@@ -1,9 +1,9 @@
-import { LitElement, html, css } from 'lit-element';
+import { LitElement, html, css, unsafeCSS } from 'lit-element';
 import '@vaadin/vaadin-split-layout';
 import './components/SideMenu.js';
 import './components/ContentArea';
 import './components/FormPopup';
-import { SharedStyles } from './shared-styles.js';
+import { SharedStyles, SmallScreen } from './shared-styles.js';
 
 /**
  * `phonebook-app`
@@ -123,13 +123,12 @@ class PhonebookApp extends LitElement {
         vaadin-split-layout {
           min-height: 100vh;
         }
-
-        @media only screen and (max-width: 60rem) {
-          vaadin-split-layout side-menu {
-            display: none;
-          }
+      `,
+      unsafeCSS(SmallScreen(`
+        vaadin-split-layout side-menu {
+          display:none;
         }
-      `
+      `))
     ];
   }
 }
