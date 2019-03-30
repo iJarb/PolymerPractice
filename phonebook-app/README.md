@@ -30,5 +30,9 @@ npm run build
 This command will bundle the app in to `es5`, `es6`, `esm` bundles in `/build` directory.
 Each of those bundle can then be deploy into any front-end web server.
 
+### Heroku
+* https://git.heroku.com/phonebook-web-component.git
+* http://phonebook-web-component.herokuapp.com
+
 ## References
 * Child element [data binding](https://lit-element.polymer-project.org/docs/templates/databinding)
