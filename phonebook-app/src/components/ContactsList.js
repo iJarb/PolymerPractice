@@ -63,7 +63,10 @@ export default class ContactsList extends LitElement {
     return html`
       <section class="contacts">
           <h2>Contacts</h2>
-          ${this.displayAllContacts()}
+          ${this.allContacts.length > 0 ?
+            this.displayAllContacts():
+            html`<p>There is no contact.</p>`
+          }
       </section>
     `;
   }
@@ -74,6 +77,7 @@ export default class ContactsList extends LitElement {
       css`
         :host {
           display: block;
+          font-size: 1.3rem;
         }
         h2 {
           color: #3e4162;

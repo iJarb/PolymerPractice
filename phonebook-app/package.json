@@ -16,8 +16,7 @@
     "start": "polymer serve",
     "test": "polymer test -l chrome",
     "serve:static": "polymer serve --port 5000 build/es5-bundled",
-    "build": "polymer build --name es5-bundled --bundle",
-    "build-all": "polymer build"
+    "build": "polymer build"
   },
   "devDependencies": {
     "@polymer/test-fixture": "^4.0.2",

@@ -64,10 +64,10 @@ export default class BookmarkList extends LitElement {
 
   render() {
     return html`
-      <h2>Bookmark</h2>
-      <section class="bookmark">
-        ${this.displayBookmarkContacts()}
-      </section>
+      ${this.allContacts.length > 0 ?
+        html `<h2>Bookmark</h2>
+        <section class="bookmark">${this.displayBookmarkContacts()}</section>` :
+        ''}
     `;
   }
 
@@ -80,6 +80,7 @@ export default class BookmarkList extends LitElement {
           --paper-card-header-color: var(--main-color);
           --iron-icon-width: 1.3rem;
           --iron-icon-height: 1.3rem;
+          font-size: 1.3rem;
         }
         h2 {
           color: #3e4162;
