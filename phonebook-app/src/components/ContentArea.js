@@ -1,6 +1,6 @@
 import { LitElement, html, css, unsafeCSS } from 'lit-element';
-import ContactsList from './ContactsList.js';
-import BookmarkList from './BookmarkList.js';
+import './ContactsList.js';
+import './BookmarkList.js';
 import { SharedStyles, SmallScreen } from '../shared-styles';
 
 export default class ContentArea extends LitElement {

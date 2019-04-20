@@ -64,7 +64,7 @@ export default class BookmarkList extends LitElement {
 
   render() {
     return html`
-      ${this.allContacts.length > 0 ?
+      ${this.allContacts.filter(c => c.bookmark).length > 0 ?
         html `<h2>Bookmark</h2>
         <section class="bookmark">${this.displayBookmarkContacts()}</section>` :
         ''}
